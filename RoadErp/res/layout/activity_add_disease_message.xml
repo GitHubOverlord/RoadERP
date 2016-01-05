@@ -335,6 +335,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="left"
                     android:stretchMode="columnWidth"
+                    android:background="@color/bg_color_deep"
                     android:verticalSpacing="15dp" >
                 </GridView>
             </LinearLayout>

@@ -26,6 +26,8 @@
         <activity android:name="com.lida.road.activity.MainActivity" />
         <activity android:name="com.lida.road.activity.DiseaseMessageActivity" />
         <activity android:name="com.lida.road.activity.AddDeseaMessageActivity" />
+        <activity android:name="com.lida.road.activity.ConstructionDutyActivity"/>
+        <activity android:name="com.lida.road.activity.CheckAndAcceptDutyActivity"/>
     </application>
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />

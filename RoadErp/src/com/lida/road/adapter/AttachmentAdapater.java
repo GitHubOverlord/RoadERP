@@ -5,14 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import u.aly.bu;
-
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -24,11 +23,13 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.jun.frame.utils.MediaFile;
+import com.jun.frame.utils.VedioThumbnailUtil;
 import com.lida.road.R;
 
 public class AttachmentAdapater extends BaseAdapter {
 	private Context context;
-	private List<String> attachmentUrl = new ArrayList<String>();
+	public List<String> attachmentUrl = new ArrayList<String>();
 	private LayoutInflater layoutInflater;
 	private String choicePicuterRemind[] = { "录制视频", "拍照", "从本地选择" };
 	public static final int REQUEST_VEDIO_CODE = 555;
@@ -63,6 +64,7 @@ public class AttachmentAdapater extends BaseAdapter {
 
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
+		System.out.println("add item to gridview");
 		ViewHolder viewHolder = null;
 		if (convertView == null) {
 			viewHolder = new ViewHolder();
@@ -79,7 +81,16 @@ public class AttachmentAdapater extends BaseAdapter {
 		if (position == 0) {
 			viewHolder.imageView.setBackgroundResource(R.drawable.icon_camera);
 		} else {
-
+			String fileName = attachmentUrl.get(position);
+			boolean isAudio = MediaFile.isVideoFileType(fileName);
+			Bitmap bm = null;
+			if (isAudio) {// 判断是文件还是图片
+				VedioThumbnailUtil vedioThumbnailUtil = new VedioThumbnailUtil();
+				bm = vedioThumbnailUtil.getVideoThumbnail(fileName);
+			} else {
+				bm = BitmapFactory.decodeFile(fileName);
+			}
+			viewHolder.imageView.setImageBitmap(bm);
 		}
 		viewHolder.relativeLayout.setOnClickListener(new OnClickListener() {
 
@@ -156,7 +167,7 @@ public class AttachmentAdapater extends BaseAdapter {
 								@Override
 								public void onClick(DialogInterface dialog,
 										int which) {
-									
+
 								}
 							});
 					builder.create();
