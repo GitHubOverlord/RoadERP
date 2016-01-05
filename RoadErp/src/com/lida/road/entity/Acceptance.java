@@ -3,6 +3,11 @@ package com.lida.road.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * 验收单实体
+ * @author linniantai
+ *
+ */
 public class Acceptance implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -12,7 +17,7 @@ public class Acceptance implements Serializable {
 	/**病害信息*/
 	private DiseaseRecord diseaseRecord;
 	/**施工单信息*/
-	private Construction Construction;
+	private Construction construction;
 	/**工程量差*/
 	private Double hdJob;
 	/**计量单位*/
@@ -55,12 +60,7 @@ public class Acceptance implements Serializable {
 	public void setDiseaseRecord(DiseaseRecord diseaseRecord) {
 		this.diseaseRecord = diseaseRecord;
 	}
-	public Construction getConstruction() {
-		return Construction;
-	}
-	public void setConstruction(Construction construction) {
-		Construction = construction;
-	}
+	
 	public Double getHdJob() {
 		return hdJob;
 	}
@@ -156,6 +156,12 @@ public class Acceptance implements Serializable {
 	}
 	public void setWorkManagerUserName(String workManagerUserName) {
 		this.workManagerUserName = workManagerUserName;
+	}
+	public Construction getConstruction() {
+		return construction;
+	}
+	public void setConstruction(Construction construction) {
+		this.construction = construction;
 	}
 	
 }
