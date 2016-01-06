@@ -29,7 +29,7 @@ import com.lida.road.constant.ViewIdConstant;
 public class MainActivity extends MainBaseActivity {
 	private GridView gridView;
 	private String items[] = { "巡查考勤", "病害信息", "施工任务", "验收任务" };
-	private Class clazzs[] = { AttendanceActivity.class,
+	private Class<?> clazzs[] = { AttendanceActivity.class,
 			DiseaseMessageActivity.class, ConstructionDutyActivity.class,
 			CheckAndAcceptDutyActivity.class };
 

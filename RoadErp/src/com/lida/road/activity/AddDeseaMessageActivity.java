@@ -1,7 +1,5 @@
 package com.lida.road.activity;
 
-import java.util.Iterator;
-
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;

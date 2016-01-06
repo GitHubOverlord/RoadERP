@@ -19,9 +19,11 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="90dp"
             android:hint="请输入搜索关键词"
+            android:singleLine="true"
             android:textSize="@dimen/text_max" />
 
         <Button
+            android:id="@+id/disease_search"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -29,9 +31,10 @@
             android:textSize="@dimen/text_max" />
     </RelativeLayout>
 
-    <ListView
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
+        android:id="@+id/listview_disease_list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" >
-    </ListView>
+    </com.handmark.pulltorefresh.library.PullToRefreshListView>
 
 </LinearLayout>
