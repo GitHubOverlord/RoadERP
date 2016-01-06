@@ -20,6 +20,8 @@ public class PersistenceManager {
 	public static final String USER_NAME = "user_name";
 	public static final String USER_PASSOWRD = "user_password";
 	public static final String ADMIN = "admin";
+	public static final String HOST_IP  = "host_ip";
+	public static final String HOST_PORT = "host_port";
 
 	/**
 	 * 用来保存用户是否登录
@@ -75,5 +77,21 @@ public class PersistenceManager {
 
 	public void putAdmin(Admin admin) {
 		appPersistence.put(ADMIN, admin);
+	}
+	public String getHostIp(){
+		String hostIp = appPersistence.get(HOST_IP, String.class);
+		return hostIp == null?"":hostIp;
+	}
+	public void putHostIp(String hostIp){
+		appPersistence.put(HOST_IP, hostIp);
+		
+	}
+	public String getHostPort (){
+		String hostPort = appPersistence.get(HOST_PORT, String.class);
+		return hostPort == null?"":hostPort;
+	}
+	public void putHostPort(String hostPort){
+		appPersistence.put(HOST_PORT, hostPort);
+		
 	}
 }

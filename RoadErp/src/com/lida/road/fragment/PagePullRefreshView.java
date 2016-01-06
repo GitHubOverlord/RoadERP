@@ -17,7 +17,6 @@ import com.jun.android_frame.http.utils.HttpConnectByJson;
 import com.jun.android_frame.inter.HttpConnectReciver;
 import com.jun.frame.R;
 import com.jun.frame.utils.SystemUtils;
-import com.lida.road.activity.DiseaseMessageActivity;
 import com.lida.road.entity.BasePagerEntity;
 import com.lida.road.entity.Pager;
 import com.loopj.android.http.RequestParams;

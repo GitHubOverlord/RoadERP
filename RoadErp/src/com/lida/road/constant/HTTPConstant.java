@@ -14,4 +14,8 @@ public class HTTPConstant {
 	 */
 	public static final String MY_DISEASE_MESSAGE_URL = HOST_URL
 			+ "diseaseRecord_mList.do";
+	/**
+	 * 上传我的地理信息位置
+	 */
+	public static final String UPLOAD_MY_LOCATION = HOST_URL+"baiduAction_mSetGis.do";
 }

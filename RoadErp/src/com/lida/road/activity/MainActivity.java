@@ -5,20 +5,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import com.jun.android_frame.activity.MainBaseActivity;
 import com.jun.android_frame.constant.ResourceConstant;
 import com.jun.android_frame.view.BackImageView;
-import com.jun.frame.utils.GPSUtils;
 import com.jun.frame.utils.SystemUtils;
 import com.lida.road.R;
 import com.lida.road.constant.ViewIdConstant;
+import com.lida.road.service.AttendanceSerivice;
 
 /**
  * 主界面
@@ -32,6 +34,7 @@ public class MainActivity extends MainBaseActivity {
 	private Class<?> clazzs[] = { AttendanceActivity.class,
 			DiseaseMessageActivity.class, ConstructionDutyActivity.class,
 			CheckAndAcceptDutyActivity.class };
+	private static boolean isUploadingLocation = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -66,12 +69,26 @@ public class MainActivity extends MainBaseActivity {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
+			TextView textView = (TextView) view.findViewById(R.id.gridview_main_name);
+			Intent intent = new Intent(AttendanceSerivice.TAG);
 			if (position == 0) {// 点击第一个按钮，我们这里是考勤，也就是GPS定位
-				GPSUtils gpsUtils = new GPSUtils(MainActivity.this);
-				if (!gpsUtils.checkGpsIsOpen()) {// GPS没有打开的时候
-					gpsUtils.forceOpenGps();// 强制用户打开GPS
+				if (isUploadingLocation) {
+					textView.setText("巡查考勤");
+					isUploadingLocation = false;
+					Bundle bundle = new Bundle();
+					bundle.putInt(AttendanceSerivice.UPLOAD_SWITCH,
+							AttendanceSerivice.STOP_UPLOAD);
+					intent.putExtras(bundle);
+					
+				} else {
+					textView.setText("正在考勤...");
+					isUploadingLocation = true;
+					Bundle bundle = new Bundle();
+					bundle.putInt(AttendanceSerivice.UPLOAD_SWITCH,
+							AttendanceSerivice.START_UPLOAD);
+					intent.putExtras(bundle);
 				}
-
+				startService(intent);
 			} else {
 				SystemUtils.intentToAnotherActivity(MainActivity.this,
 						clazzs[position]);
