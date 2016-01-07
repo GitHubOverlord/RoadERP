@@ -6,11 +6,8 @@ import java.util.List;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
-import com.google.gson.reflect.TypeToken;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.jun.android_frame.activity.MainBaseActivity;
 import com.jun.android_frame.constant.ResourceConstant;
@@ -28,8 +25,7 @@ public class DiseaseMessageActivity extends MainBaseActivity {
 	private List<DiseaseRecord> list;
 	private DiseaseMessageAdapter diseaseMessageAdapter;
 	private PullToRefreshListView pullToRefreshListView;
-	private Button searchButton;
-	private EditText searchKeyEditText;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -50,8 +46,6 @@ public class DiseaseMessageActivity extends MainBaseActivity {
 				ResourceConstant.ACTIONBAR_RIGHT_VIEW);
 		textView.setText("添加");
 		textView.setOnClickListener(listener);
-		searchKeyEditText = (EditText)findViewById(R.id.disease_message_search_key);
-		searchButton = (Button)findViewById(R.id.disease_search);
 		pullToRefreshListView = (PullToRefreshListView) findViewById(R.id.listview_disease_list);
 		list = new ArrayList<>();
 		diseaseMessageAdapter = new DiseaseMessageAdapter(
@@ -60,9 +54,7 @@ public class DiseaseMessageActivity extends MainBaseActivity {
 		PagePullRefreshView<DiseaseRecord> pagePullRefreshView = new PagePullRefreshView<>(
 				pullToRefreshListView, diseaseMessageAdapter,
 				DiseaseMessageActivity.this,
-				HTTPConstant.MY_DISEASE_MESSAGE_URL, requestParams,
-				new TypeToken<List<DiseaseRecord>>() {
-				}.getType(), list);
+				HTTPConstant.MY_DISEASE_MESSAGE_URL, requestParams, list);
 		pagePullRefreshView.start();
 	}
 
@@ -76,11 +68,7 @@ public class DiseaseMessageActivity extends MainBaseActivity {
 						DiseaseMessageActivity.this,
 						AddDeseaMessageActivity.class);
 				break;
-			case R.id.disease_search:
-				String searchKey = searchKeyEditText.getEditableText().toString();
-				
-				break;
-			default:	
+			default:
 				break;
 			}
 

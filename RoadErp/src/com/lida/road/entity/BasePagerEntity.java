@@ -2,21 +2,22 @@ package com.lida.road.entity;
 
 import java.util.List;
 
-public class BasePagerEntity<T> {
+public class BasePagerEntity {
 	private Pager pager;
-	private List<? extends T> value;
+	private List<?> list;
 	public Pager getPager() {
 		return pager;
 	}
 	public void setPager(Pager pager) {
 		this.pager = pager;
 	}
-	public List<? extends T> getValue() {
-		return value;
+	public List<?> getList() {
+		return list;
 	}
-	public void setValue(List<? extends T> value) {
-		this.value = value;
+	public void setList(List<?> list) {
+		this.list = list;
 	}
+	
 	
 	
 }

@@ -1,40 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+     android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="15dp"
-        android:orientation="horizontal" >
-
-        <EditText
-            android:id="@+id/disease_message_search_key"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="90dp"
-            android:hint="请输入搜索关键词"
-            android:singleLine="true"
-            android:textSize="@dimen/text_max" />
-
-        <Button
-            android:id="@+id/disease_search"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="搜索"
-            android:textSize="@dimen/text_max" />
-    </RelativeLayout>
+   
 
     <com.handmark.pulltorefresh.library.PullToRefreshListView
         android:id="@+id/listview_disease_list"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
+        android:layout_height="fill_parent"
+        android:cacheColorHint="#00000000"
+        android:divider="#19000000"
+        android:dividerHeight="4dp"
+        android:smoothScrollbar="true" >
     </com.handmark.pulltorefresh.library.PullToRefreshListView>
 
 </LinearLayout>
