@@ -42,11 +42,6 @@ public class AttachmentAdapater extends BaseAdapter {
 		attachmentUrl.add("");
 	}
 
-	private class ViewHolder {
-		RelativeLayout relativeLayout;
-		ImageView imageView;
-	}
-
 	@Override
 	public int getCount() {
 		return attachmentUrl.size();
@@ -65,21 +60,15 @@ public class AttachmentAdapater extends BaseAdapter {
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
 		System.out.println("add item to gridview");
-		ViewHolder viewHolder = null;
-		if (convertView == null) {
-			viewHolder = new ViewHolder();
-			convertView = layoutInflater.inflate(R.layout.gridview_attachment,
-					parent, false);
-			viewHolder.relativeLayout = (RelativeLayout) convertView
-					.findViewById(R.id.attachement_rl);
-			viewHolder.imageView = (ImageView) convertView
-					.findViewById(R.id.attachement_iv);
-			convertView.setTag(viewHolder);
-		} else {
-			viewHolder = (ViewHolder) convertView.getTag();
-		}
-		if (position == 0) {
-			viewHolder.imageView.setBackgroundResource(R.drawable.icon_camera);
+		RelativeLayout relativeLayout;
+		ImageView imageView;
+		convertView = layoutInflater.inflate(R.layout.gridview_attachment,
+				parent, false);
+		relativeLayout = (RelativeLayout) convertView
+				.findViewById(R.id.attachement_rl);
+		imageView = (ImageView) convertView.findViewById(R.id.attachement_iv);
+		if (position == attachmentUrl.size() - 1) {
+			imageView.setBackgroundResource(R.drawable.icon_camera);
 		} else {
 			String fileName = attachmentUrl.get(position);
 			boolean isAudio = MediaFile.isVideoFileType(fileName);
@@ -90,13 +79,13 @@ public class AttachmentAdapater extends BaseAdapter {
 			} else {
 				bm = BitmapFactory.decodeFile(fileName);
 			}
-			viewHolder.imageView.setImageBitmap(bm);
+			imageView.setImageBitmap(bm);
 		}
-		viewHolder.relativeLayout.setOnClickListener(new OnClickListener() {
+		relativeLayout.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				if (position == 0) {
+				if (position == attachmentUrl.size() - 1) {
 					AlertDialog.Builder builder = new AlertDialog.Builder(
 							context);
 					builder.setItems(choicePicuterRemind,
@@ -158,7 +147,9 @@ public class AttachmentAdapater extends BaseAdapter {
 								@Override
 								public void onClick(DialogInterface dialog,
 										int which) {
-
+									attachmentUrl.remove(position);
+									AttachmentAdapater.this
+											.notifyDataSetChanged();
 								}
 							});
 					builder.setNegativeButton("取消",

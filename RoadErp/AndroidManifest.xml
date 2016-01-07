@@ -28,6 +28,7 @@
         <activity android:name="com.lida.road.activity.AddDeseaMessageActivity" />
         <activity android:name="com.lida.road.activity.ConstructionDutyActivity" />
         <activity android:name="com.lida.road.activity.CheckAndAcceptDutyActivity" />
+        <activity android:name="com.lida.road.activity.FragmentTestActivity" />
 
         <service
             android:name="com.lida.road.service.AttendanceSerivice"

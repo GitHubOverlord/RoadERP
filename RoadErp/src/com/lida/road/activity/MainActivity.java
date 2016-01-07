@@ -30,11 +30,12 @@ import com.lida.road.service.AttendanceSerivice;
  */
 public class MainActivity extends MainBaseActivity {
 	private GridView gridView;
-	private String items[] = { "巡查考勤", "病害信息", "施工任务", "验收任务" };
+	private String items[] = { "巡查考勤", "病害信息", "施工任务", "验收任务", "测试" };
 	private Class<?> clazzs[] = { AttendanceActivity.class,
 			DiseaseMessageActivity.class, ConstructionDutyActivity.class,
-			CheckAndAcceptDutyActivity.class };
+			CheckAndAcceptDutyActivity.class, FragmentTestActivity.class };
 	private static boolean isUploadingLocation = false;
+	private Intent uploadLocatinServiceIntent;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -69,26 +70,23 @@ public class MainActivity extends MainBaseActivity {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
-			TextView textView = (TextView) view.findViewById(R.id.gridview_main_name);
-			Intent intent = new Intent(AttendanceSerivice.TAG);
+			TextView textView = (TextView) view
+					.findViewById(R.id.gridview_main_name);
 			if (position == 0) {// 点击第一个按钮，我们这里是考勤，也就是GPS定位
+				uploadLocatinServiceIntent = new Intent();
+				uploadLocatinServiceIntent.setAction(AttendanceSerivice.TAG);
+				uploadLocatinServiceIntent.setPackage(getPackageName());
 				if (isUploadingLocation) {
 					textView.setText("巡查考勤");
 					isUploadingLocation = false;
-					Bundle bundle = new Bundle();
-					bundle.putInt(AttendanceSerivice.UPLOAD_SWITCH,
-							AttendanceSerivice.STOP_UPLOAD);
-					intent.putExtras(bundle);
-					
+					stopService(uploadLocatinServiceIntent);
+
 				} else {
 					textView.setText("正在考勤...");
 					isUploadingLocation = true;
-					Bundle bundle = new Bundle();
-					bundle.putInt(AttendanceSerivice.UPLOAD_SWITCH,
-							AttendanceSerivice.START_UPLOAD);
-					intent.putExtras(bundle);
+					startService(uploadLocatinServiceIntent);
 				}
-				startService(intent);
+
 			} else {
 				SystemUtils.intentToAnotherActivity(MainActivity.this,
 						clazzs[position]);
@@ -96,4 +94,11 @@ public class MainActivity extends MainBaseActivity {
 		}
 	};
 
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		if (uploadLocatinServiceIntent != null) {
+			stopService(uploadLocatinServiceIntent);
+		}
+	}
 }
