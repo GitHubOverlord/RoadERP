@@ -12,6 +12,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -19,12 +20,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.jun.frame.utils.BitmapUtils;
 import com.jun.frame.utils.MediaFile;
 import com.jun.frame.utils.VedioThumbnailUtil;
+import com.jun.frame.utils.ViewUtils;
 import com.lida.road.R;
 
 public class AttachmentAdapater extends BaseAdapter {
@@ -61,7 +65,7 @@ public class AttachmentAdapater extends BaseAdapter {
 	public View getView(final int position, View convertView, ViewGroup parent) {
 		System.out.println("add item to gridview");
 		RelativeLayout relativeLayout;
-		ImageView imageView;
+		final ImageView imageView;
 		convertView = layoutInflater.inflate(R.layout.gridview_attachment,
 				parent, false);
 		relativeLayout = (RelativeLayout) convertView
@@ -72,14 +76,18 @@ public class AttachmentAdapater extends BaseAdapter {
 		} else {
 			String fileName = attachmentUrl.get(position);
 			boolean isAudio = MediaFile.isVideoFileType(fileName);
-			Bitmap bm = null;
+			final Bitmap bm;
 			if (isAudio) {// 判断是文件还是图片
 				VedioThumbnailUtil vedioThumbnailUtil = new VedioThumbnailUtil();
 				bm = vedioThumbnailUtil.getVideoThumbnail(fileName);
 			} else {
 				bm = BitmapFactory.decodeFile(fileName);
 			}
-			imageView.setImageBitmap(bm);
+			ViewUtils viewUtils = new ViewUtils(imageView);
+			imageView.setBackgroundDrawable(new BitmapDrawable(BitmapUtils
+					.getBitmapThumbnail(bm, viewUtils.getViewWidth(),
+							viewUtils.getViewHeight())));
+			bm.recycle();
 		}
 		relativeLayout.setOnClickListener(new OnClickListener() {
 

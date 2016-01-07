@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 
+import com.google.gson.reflect.TypeToken;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.jun.android_frame.activity.MainBaseActivity;
 import com.jun.android_frame.constant.ResourceConstant;
@@ -17,8 +18,10 @@ import com.lida.road.R;
 import com.lida.road.adapter.DiseaseMessageAdapter;
 import com.lida.road.constant.HTTPConstant;
 import com.lida.road.constant.ViewIdConstant;
+import com.lida.road.entity.BasePagerEntity;
 import com.lida.road.entity.DiseaseRecord;
-import com.lida.road.fragment.PagePullRefreshView;
+import com.lida.road.entity.UserMessage;
+import com.lida.road.view.PagePullRefreshView;
 import com.loopj.android.http.RequestParams;
 
 public class DiseaseMessageActivity extends MainBaseActivity {
@@ -54,7 +57,8 @@ public class DiseaseMessageActivity extends MainBaseActivity {
 		PagePullRefreshView<DiseaseRecord> pagePullRefreshView = new PagePullRefreshView<>(
 				pullToRefreshListView, diseaseMessageAdapter,
 				DiseaseMessageActivity.this,
-				HTTPConstant.MY_DISEASE_MESSAGE_URL, requestParams, list);
+				HTTPConstant.MY_DISEASE_MESSAGE_URL, requestParams, list,new TypeToken<BasePagerEntity<DiseaseRecord>>() {
+				}.getType());
 		pagePullRefreshView.start();
 	}
 

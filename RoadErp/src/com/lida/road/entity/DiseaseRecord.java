@@ -1,7 +1,6 @@
 package com.lida.road.entity;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /***
  * 日常养护-病害信息单
@@ -37,7 +36,7 @@ public class DiseaseRecord implements Serializable{
 	/**估算金额（元）*/
 	private Double estimatingCost;
 	/**上报时间*/
-	private Date reportTime;
+	private String reportTime;
 	/**上报单位*/
 	private String orgName;
 	/**上报单位id*/
@@ -119,10 +118,10 @@ public class DiseaseRecord implements Serializable{
 	public void setEstimatingCost(Double estimatingCost) {
 		this.estimatingCost = estimatingCost;
 	}
-	public Date getReportTime() {
+	public String getReportTime() {
 		return reportTime;
 	}
-	public void setReportTime(Date reportTime) {
+	public void setReportTime(String reportTime) {
 		this.reportTime = reportTime;
 	}
 	public String getOrgName() {

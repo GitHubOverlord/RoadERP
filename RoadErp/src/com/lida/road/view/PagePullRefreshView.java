@@ -1,5 +1,6 @@
-package com.lida.road.fragment;
+package com.lida.road.view;
 
+import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.List;
 
@@ -7,7 +8,6 @@ import android.content.Context;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 
-import com.google.gson.reflect.TypeToken;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
@@ -31,17 +31,19 @@ public class PagePullRefreshView<T> implements IPullRefreshListTemplet,
 	private RequestParams requestParams;
 	private List<T> list;
 	private int page;
-	private boolean isHead = false;;
+	private boolean isHead = true;
+	private Type type;
 
 	public PagePullRefreshView(PullToRefreshListView pullToRefreshListView,
 			BaseAdapter adapter, Context c, String url,
-			RequestParams requestParams, List<T> list) {
+			RequestParams requestParams, List<T> list, Type type) {
 		this.pullToRefreshListView = pullToRefreshListView;
 		this.adapter = adapter;
 		this.c = c;
 		this.url = url;
 		this.requestParams = requestParams;
 		this.list = list;
+		this.type = type;
 	}
 
 	public void start() {
@@ -92,14 +94,14 @@ public class PagePullRefreshView<T> implements IPullRefreshListTemplet,
 							BaseEntity baseEntity) {
 						pullToRefreshListView.onRefreshComplete();
 						Pager pager = t.getPager();
-						if (!isHead && pager.getCurrentPage() == page) {// 拿到的页面和当前页面一样
+						if (!isHead && pager.getTotalPage() <= page) {// 拿到的页面和当前页面一样
 							SystemUtils.MToast("没有更多数据", c);
+							return;
 						}
 						list.addAll((Collection<? extends T>) t.getList());
 						System.out.println("pullrefresh view list size:"
 								+ list.size());
 						adapter.notifyDataSetChanged();
-
 					}
 
 					@Override
@@ -108,22 +110,19 @@ public class PagePullRefreshView<T> implements IPullRefreshListTemplet,
 						pullToRefreshListView.onRefreshComplete();
 						adapter.notifyDataSetChanged();
 					}
-				}, url, requestParams, new TypeToken<BasePagerEntity>() {
-				}.getType(), c);
+				}, url, requestParams, type, c);
 		httpConnectByJson.excute();
 	}
 
 	@Override
 	public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-		SystemUtils.MToast("xxxx", c);
-		pullFromFoot();
+		pullFromHead();
 
 	}
 
 	@Override
 	public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
-		SystemUtils.MToast("xxxx", c);
-		pullFromHead();
+		pullFromFoot();
 
 	}
 

@@ -57,8 +57,10 @@ public class AttachmentFragment extends Fragment {
 				if (c != null && c.moveToFirst()) {
 					String filPath = c.getString(0);
 					System.out.println(filPath);
+					attachmentAdapater.attachmentUrl
+							.remove(attachmentAdapater.attachmentUrl.size() - 1);
 					attachmentAdapater.attachmentUrl.add(filPath);
-					Collections.reverse((attachmentAdapater.attachmentUrl));
+					attachmentAdapater.attachmentUrl.add("");
 					attachmentAdapater.notifyDataSetChanged();
 					System.out.println("总共有："
 							+ attachmentAdapater.attachmentUrl.size() + "数据");
