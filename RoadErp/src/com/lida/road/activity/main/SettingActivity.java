@@ -1,4 +1,4 @@
-package com.lida.road.activity;
+package com.lida.road.activity.main;
 
 import android.os.Bundle;
 import android.view.View;

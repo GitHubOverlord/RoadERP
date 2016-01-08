@@ -1,4 +1,4 @@
-package com.lida.road.activity;
+package com.lida.road.activity.main;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,6 +19,7 @@ import com.jun.android_frame.constant.ResourceConstant;
 import com.jun.android_frame.view.BackImageView;
 import com.jun.frame.utils.SystemUtils;
 import com.lida.road.R;
+import com.lida.road.activity.construction.ConstructionDutyActivity;
 import com.lida.road.constant.ViewIdConstant;
 import com.lida.road.service.AttendanceSerivice;
 

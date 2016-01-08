@@ -1,4 +1,4 @@
-package com.lida.road.activity;
+package com.lida.road.activity.main;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,6 +6,8 @@ import java.util.List;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView;
 
 import com.google.gson.reflect.TypeToken;
@@ -27,6 +29,7 @@ public class DiseaseMessageActivity extends MainBaseActivity {
 	private List<DiseaseRecord> list;
 	private DiseaseMessageAdapter diseaseMessageAdapter;
 	private PullToRefreshListView pullToRefreshListView;
+	private static final String BUNDLE_DISEASE_MESSAGE = "bundle_disease_message";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,15 +55,29 @@ public class DiseaseMessageActivity extends MainBaseActivity {
 		list = new ArrayList<>();
 		diseaseMessageAdapter = new DiseaseMessageAdapter(
 				DiseaseMessageActivity.this, list);
+		pullToRefreshListView.setOnItemClickListener(onItemClickListener);
 		RequestParams requestParams = new RequestParams();
 		PagePullRefreshView<DiseaseRecord> pagePullRefreshView = new PagePullRefreshView<>(
 				pullToRefreshListView, diseaseMessageAdapter,
 				DiseaseMessageActivity.this,
-				HTTPConstant.MY_DISEASE_MESSAGE_URL, requestParams, list,new TypeToken<BasePagerEntity<DiseaseRecord>>() {
+				HTTPConstant.MY_DISEASE_MESSAGE_URL, requestParams, list,
+				new TypeToken<BasePagerEntity<DiseaseRecord>>() {
 				}.getType());
 		pagePullRefreshView.start();
 	}
 
+	OnItemClickListener onItemClickListener = new OnItemClickListener() {
+
+		@Override
+		public void onItemClick(AdapterView<?> parent, View view, int position,
+				long id) {
+			Bundle bundle = new Bundle();
+			bundle.putSerializable(BUNDLE_DISEASE_MESSAGE, list.get(position));
+			SystemUtils.intentToAnotherActivity(DiseaseMessageActivity.this,
+					DiseaseMessageDetailsActivity.class, bundle);
+		}
+
+	};
 	OnClickListener listener = new OnClickListener() {
 
 		@Override

@@ -212,8 +212,7 @@ public class MainTainFlowContent {
 	
 	/***
 	 * 根据当前病害流程状态，返回下一步环节的流程状态
-	 * 1、县局<工务科科长>审批   -->   县局<主管领导>审批 --> 施工单位结束
-	 * 3、市局工务科<巡查员>   -->   市局工务科<科长>   -->   市局<主管领导>   -->    县局<工务科科长>审批（只能同意）   -->   县局<主管领导>审批
+	 * 1、县局<工务科科长>新增   -->   县局<主管领导>审批 --> 施工单位结束
 	 */
 	public static final String getNextConstructionFlowStatusByStatusAndFrom(boolean yesOrNo,String status){
 		switch (status) {

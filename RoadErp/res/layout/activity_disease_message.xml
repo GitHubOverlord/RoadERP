@@ -4,7 +4,29 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-   
+   <LinearLayout 
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       >
+
+       <Button
+           android:id="@+id/btn_disease_wait_to_accept"
+           android:layout_width="0dp"
+           android:layout_weight="1"
+           android:layout_height="wrap_content"
+           android:textSize="@dimen/text_max"
+           android:text="待审批" />
+
+       <Button
+           android:id="@+id/btn_disease_all"
+           android:layout_width="0dp"
+           android:layout_weight="1"
+           android:layout_height="wrap_content"
+           android:textSize="@dimen/text_max"
+           android:text="全部" />
+       
+   </LinearLayout>
 
     <com.handmark.pulltorefresh.library.PullToRefreshListView
         android:id="@+id/listview_disease_list"

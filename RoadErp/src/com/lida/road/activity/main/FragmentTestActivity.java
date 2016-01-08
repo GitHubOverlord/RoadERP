@@ -1,4 +1,4 @@
-package com.lida.road.activity;
+package com.lida.road.activity.main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,25 +10,21 @@ import com.jun.android_frame.activity.MainBaseActivity;
 import com.lida.road.R;
 import com.lida.road.fragment.AttachmentFragment;
 
-public class AddDeseaMessageActivity extends MainBaseActivity {
+public class FragmentTestActivity extends MainBaseActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_add_disease_message);
-		initView();
+		setContentView(R.layout.activity_test);
+
 		AttachmentFragment attachmentFragment = new AttachmentFragment();
 		addFragment(attachmentFragment, AttachmentFragment.TAG);
-	}
-
-	private void initView() {
-
 	}
 
 	private void addFragment(Fragment fragment, String tag) {
 		FragmentManager manager = getSupportFragmentManager();
 		FragmentTransaction transaction = manager.beginTransaction();
-		transaction.add(R.id.fragment_attendance, fragment, tag);
+		transaction.add(R.id.fragment_test, fragment, tag);
 		transaction.commit();
 	}
 

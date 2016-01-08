@@ -3,34 +3,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    <RelativeLayout
+
+    <android.support.v4.app.FragmentTabHost
+        android:id="@android:id/tabhost"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="15dp"
-        android:orientation="horizontal" >
+        android:layout_height="wrap_content" >
+    </android.support.v4.app.FragmentTabHost>
 
-        <EditText
-            android:id="@+id/construction_duty_message_search_key"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="90dp"
-            android:hint="请输入搜索关键词"
-            android:textSize="@dimen/text_max" />
-
-        <Button
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="搜索"
-            android:textSize="@dimen/text_max" />
-    </RelativeLayout>
-
-    <ListView
+    <FrameLayout
+        android:id="@+id/realtabcontent"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
-    </ListView>
+        android:layout_height="0dip"
+        android:layout_weight="1" />
+
+    <FrameLayout
+        android:id="@android:id/tabcontent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="0" />
 
 </LinearLayout>

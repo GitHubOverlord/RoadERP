@@ -92,6 +92,7 @@
                     android:textSize="@dimen/text_max" />
 
                 <Spinner
+                    android:id="@+id/disease_level"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10" />
@@ -112,6 +113,7 @@
                     android:textSize="@dimen/text_max" />
 
                 <Spinner
+                    android:id="@+id/disease_category"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10" />
@@ -132,6 +134,7 @@
                     android:textSize="@dimen/text_max" />
 
                 <ListView
+                    android:id="@+id/disease_type"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content" >
                 </ListView>
