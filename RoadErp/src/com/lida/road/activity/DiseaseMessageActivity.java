@@ -20,7 +20,6 @@ import com.lida.road.constant.HTTPConstant;
 import com.lida.road.constant.ViewIdConstant;
 import com.lida.road.entity.BasePagerEntity;
 import com.lida.road.entity.DiseaseRecord;
-import com.lida.road.entity.UserMessage;
 import com.lida.road.view.PagePullRefreshView;
 import com.loopj.android.http.RequestParams;
 

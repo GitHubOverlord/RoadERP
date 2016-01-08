@@ -1,7 +1,5 @@
 package com.lida.road.fragment;
 
-import java.util.Collections;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;

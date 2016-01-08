@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -20,7 +21,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -76,18 +76,18 @@ public class AttachmentAdapater extends BaseAdapter {
 		} else {
 			String fileName = attachmentUrl.get(position);
 			boolean isAudio = MediaFile.isVideoFileType(fileName);
-			final Bitmap bm;
+			Bitmap bm;
 			if (isAudio) {// 判断是文件还是图片
 				VedioThumbnailUtil vedioThumbnailUtil = new VedioThumbnailUtil();
 				bm = vedioThumbnailUtil.getVideoThumbnail(fileName);
 			} else {
 				bm = BitmapFactory.decodeFile(fileName);
 			}
+			BitmapUtils bitmapUtilities = new BitmapUtils();
 			ViewUtils viewUtils = new ViewUtils(imageView);
-			imageView.setBackgroundDrawable(new BitmapDrawable(BitmapUtils
-					.getBitmapThumbnail(bm, viewUtils.getViewWidth(),
-							viewUtils.getViewHeight())));
-			bm.recycle();
+			 bm = bitmapUtilities.getBitmapThumbnail(bm, viewUtils.getViewWidth(), viewUtils.getViewHeight());
+			Drawable drawable = new BitmapDrawable(bm);
+			imageView.setBackgroundDrawable(drawable);
 		}
 		relativeLayout.setOnClickListener(new OnClickListener() {
 
