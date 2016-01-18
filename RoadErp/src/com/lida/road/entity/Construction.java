@@ -27,11 +27,11 @@ public class Construction implements Serializable {
 	/**领导审核金额*/
 	private Double ldCost;
 	/**发布时间*/
-	private Date publishDate;
+	private String publishDate;
 	/**执行时间*/
-	private Date executeDate;
+	private String executeDate;
 	/**完成时间*/
-	private Date completeDate;
+	private String completeDate;
 	/**质保期（天）*/
 	private Integer guaranteePeriod;
 	/**施工单位人员-id*/
@@ -122,22 +122,24 @@ public class Construction implements Serializable {
 	public void setLdCost(Double ldCost) {
 		this.ldCost = ldCost;
 	}
-	public Date getPublishDate() {
+
+	public String getPublishDate() {
 		return publishDate;
 	}
-	public void setPublishDate(Date publishDate) {
+	public void setPublishDate(String publishDate) {
 		this.publishDate = publishDate;
 	}
-	public Date getExecuteDate() {
+	public String getExecuteDate() {
 		return executeDate;
 	}
-	public void setExecuteDate(Date executeDate) {
+	public void setExecuteDate(String executeDate) {
 		this.executeDate = executeDate;
 	}
-	public Date getCompleteDate() {
+
+	public String getCompleteDate() {
 		return completeDate;
 	}
-	public void setCompleteDate(Date completeDate) {
+	public void setCompleteDate(String completeDate) {
 		this.completeDate = completeDate;
 	}
 	public Integer getGuaranteePeriod() {

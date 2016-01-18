@@ -1,9 +1,7 @@
 package com.lida.road.adapter;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -14,8 +12,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +21,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import com.jun.frame.utils.BitmapUtils;
+import com.jun.frame.utils.BitmapUtilities;
 import com.jun.frame.utils.MediaFile;
 import com.jun.frame.utils.VedioThumbnailUtil;
 import com.jun.frame.utils.ViewUtils;
@@ -77,15 +73,15 @@ public class AttachmentAdapater extends BaseAdapter {
 			String fileName = attachmentUrl.get(position);
 			boolean isAudio = MediaFile.isVideoFileType(fileName);
 			Bitmap bm;
-			if (isAudio) {// 判断是文件还是图片
+			if (isAudio) {// 判断是文件还是视频
 				VedioThumbnailUtil vedioThumbnailUtil = new VedioThumbnailUtil();
 				bm = vedioThumbnailUtil.getVideoThumbnail(fileName);
 			} else {
 				bm = BitmapFactory.decodeFile(fileName);
 			}
-			BitmapUtils bitmapUtilities = new BitmapUtils();
+			BitmapUtilities bitmapUtilities = new BitmapUtilities();
 			ViewUtils viewUtils = new ViewUtils(imageView);
-			 bm = bitmapUtilities.getBitmapThumbnail(bm, viewUtils.getViewWidth(), viewUtils.getViewHeight());
+			bm = bitmapUtilities.getBitmapThumbnail(bm, 160, 160);
 			Drawable drawable = new BitmapDrawable(bm);
 			imageView.setBackgroundDrawable(drawable);
 		}
@@ -117,12 +113,12 @@ public class AttachmentAdapater extends BaseAdapter {
 									case 1:// 拍照
 										Intent intent1 = new Intent(
 												MediaStore.ACTION_IMAGE_CAPTURE);
-										File out = new File(Environment
-												.getExternalStorageDirectory(),
-												UUID.randomUUID() + ".jpg");
-										Uri uri = Uri.fromFile(out);
-										intent1.putExtra(
-												MediaStore.EXTRA_OUTPUT, uri);
+//										File out = new File(Environment
+//												.getExternalStorageDirectory(),
+//												UUID.randomUUID() + ".jpg");
+//										Uri uri = Uri.fromFile(out);
+//										intent1.putExtra(
+//												MediaStore.EXTRA_OUTPUT, uri);
 										((Activity) context)
 												.startActivityForResult(
 														intent1,

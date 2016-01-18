@@ -1,41 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-     android:layout_width="fill_parent"
+    android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-   <LinearLayout 
-       android:layout_width="fill_parent"
-       android:layout_height="wrap_content"
-       android:orientation="horizontal"
-       >
-
-       <Button
-           android:id="@+id/btn_disease_wait_to_accept"
-           android:layout_width="0dp"
-           android:layout_weight="1"
-           android:layout_height="wrap_content"
-           android:textSize="@dimen/text_max"
-           android:text="待审批" />
-
-       <Button
-           android:id="@+id/btn_disease_all"
-           android:layout_width="0dp"
-           android:layout_weight="1"
-           android:layout_height="wrap_content"
-           android:textSize="@dimen/text_max"
-           android:text="全部" />
-       
-   </LinearLayout>
-
-    <com.handmark.pulltorefresh.library.PullToRefreshListView
-        android:id="@+id/listview_disease_list"
+    <FrameLayout
+        android:id="@+id/realtabcontent"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:cacheColorHint="#00000000"
-        android:divider="#19000000"
-        android:dividerHeight="4dp"
-        android:smoothScrollbar="true" >
-    </com.handmark.pulltorefresh.library.PullToRefreshListView>
+        android:layout_height="0dip"
+        android:layout_weight="1" />
+
+    <android.support.v4.app.FragmentTabHost
+        android:id="@android:id/tabhost"
+       android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+    </android.support.v4.app.FragmentTabHost>
+
+    <FrameLayout
+        android:id="@android:id/tabcontent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="0" />
 
 </LinearLayout>

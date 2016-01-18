@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <com.jun.android_frame.view.MyGridView
+        android:id="@+id/picture_gridView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="15dp"
+        android:background="@color/bg_color_deep"
+        android:columnWidth="100dp"
+        android:gravity="left"
+        android:numColumns="auto_fit"
+        android:verticalSpacing="15dp" >
+    </com.jun.android_frame.view.MyGridView>
+
+</LinearLayout>

@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
@@ -19,8 +20,12 @@ import com.jun.android_frame.constant.ResourceConstant;
 import com.jun.android_frame.view.BackImageView;
 import com.jun.frame.utils.SystemUtils;
 import com.lida.road.R;
+import com.lida.road.activity.accept.CheckAndAcceptDutyActivity;
 import com.lida.road.activity.construction.ConstructionDutyActivity;
+import com.lida.road.activity.disease.DiseaseMessageActivity;
+import com.lida.road.constant.UserConstant;
 import com.lida.road.constant.ViewIdConstant;
+import com.lida.road.entity.MainTainFlowContent;
 import com.lida.road.service.AttendanceSerivice;
 
 /**
@@ -31,7 +36,10 @@ import com.lida.road.service.AttendanceSerivice;
  */
 public class MainActivity extends MainBaseActivity {
 	private GridView gridView;
-	private String items[] = { "巡查考勤", "病害信息", "施工任务", "验收任务", "测试" };
+	private String items[] = { "巡查考勤", "病害信息", "施工任务", "验收任务" };
+	private int imgs[] = { R.drawable.iconfont_xuncha,
+			R.drawable.iconfont_xinxi, R.drawable.iconfont_daolushigong,
+			R.drawable.iconfont_shenhe };
 	private Class<?> clazzs[] = { AttendanceActivity.class,
 			DiseaseMessageActivity.class, ConstructionDutyActivity.class,
 			CheckAndAcceptDutyActivity.class, FragmentTestActivity.class };
@@ -54,15 +62,16 @@ public class MainActivity extends MainBaseActivity {
 				ResourceConstant.ACTIONBAR_BACK_IMAGEVIEW);
 		backImageView.setVisibility(View.GONE);
 		List<Map<String, Object>> maps = new ArrayList<>();
-		for (String string : items) {
+		for (int i = 0; i < items.length; i++) {
 			HashMap<String, Object> map = new HashMap<>();
-			map.put("name", string);
+			map.put("name", items[i]);
+			map.put("img", imgs[i]);
 			maps.add(map);
 		}
 		gridView = (GridView) findViewById(R.id.main_gridView);
 		gridView.setAdapter(new SimpleAdapter(MainActivity.this, maps,
-				R.layout.gridview_main, new String[] { "name" },
-				new int[] { R.id.gridview_main_name }));
+				R.layout.gridview_main, new String[] { "name","img" },
+				new int[] { R.id.gridview_main_name,R.id.iv_icon }));
 		gridView.setOnItemClickListener(onItemClickListener);
 	}
 
@@ -74,6 +83,11 @@ public class MainActivity extends MainBaseActivity {
 			TextView textView = (TextView) view
 					.findViewById(R.id.gridview_main_name);
 			if (position == 0) {// 点击第一个按钮，我们这里是考勤，也就是GPS定位
+				if (!MainTainFlowContent.isInspector(UserConstant.getAdmin(
+						MainActivity.this).getMaintainPost())) {
+					SystemUtils.MToast("只有巡查员才可以考勤！", MainActivity.this);
+					return;
+				}
 				uploadLocatinServiceIntent = new Intent();
 				uploadLocatinServiceIntent.setAction(AttendanceSerivice.TAG);
 				uploadLocatinServiceIntent.setPackage(getPackageName());

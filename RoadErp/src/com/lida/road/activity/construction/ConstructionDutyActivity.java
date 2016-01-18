@@ -12,9 +12,13 @@ import com.jun.android_frame.constant.ResourceConstant;
 import com.jun.android_frame.view.BackImageView;
 import com.lida.road.R;
 import com.lida.road.constant.ViewIdConstant;
-import com.lida.road.fragment.AcppectConstructionFragment;
-import com.lida.road.fragment.AllConstructionFragment;
 
+/**
+ * 施工列表页面，这个页面包含块，一个是待审批的施工，一个是所有的施工
+ * 
+ * @author Administrator
+ * 
+ */
 public class ConstructionDutyActivity extends MainBaseActivity {
 	private FragmentTabHost mTabHost = null;;
 	private View indicator = null;
@@ -52,8 +56,8 @@ public class ConstructionDutyActivity extends MainBaseActivity {
 
 	private View getIndicatorView(String name) {
 		View v = getLayoutInflater().inflate(R.layout.include_tab_head, null);
-		Button button = (Button) v.findViewById(R.id.tv_tab_head);
-		button.setText(name);
+		TextView textView = (TextView) v.findViewById(R.id.tv_tab_head);
+		textView.setText(name);
 		return v;
 	}
 

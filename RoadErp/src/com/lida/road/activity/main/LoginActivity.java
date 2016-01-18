@@ -1,7 +1,5 @@
 package com.lida.road.activity.main;
 
-import java.util.List;
-
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,8 +17,6 @@ import com.lida.road.R;
 import com.lida.road.constant.HTTPConstant;
 import com.lida.road.constant.UserConstant;
 import com.lida.road.constant.ViewIdConstant;
-import com.lida.road.entity.DiseaseCategory;
-import com.lida.road.entity.DiseaseType;
 import com.lida.road.entity.UserMessage;
 import com.lida.road.utils.PersistenceManager;
 import com.loopj.android.http.RequestParams;
@@ -44,7 +40,13 @@ public class LoginActivity extends MainBaseActivity {
 		initView();
 	}
 
+	/**
+	 * 这个方法用于初始化界面
+	 */
 	private void initView() {
+		/**
+		 * 这几行代码用来设置页面头部的布局，就是页面的提示信息，以及页面返回按钮
+		 */
 		setActionBar(R.layout.include_head_textbtn);
 		setActionBarWidgetResource(ViewIdConstant.ACTIONBAR_TITLE,
 				ResourceConstant.ACTIONBAR_TITLE, "登录");
@@ -52,6 +54,9 @@ public class LoginActivity extends MainBaseActivity {
 				ViewIdConstant.ACTIONBAR_BACK_IAMGEVIEW,
 				ResourceConstant.ACTIONBAR_BACK_IMAGEVIEW);
 		backImageView.setVisibility(View.GONE);
+		/**
+		 * 根据布局页面找到控件
+		 */
 		userNameEditText = (EditText) findViewById(R.id.login_user_name);
 		passwordEditText = (EditText) findViewById(R.id.login_password);
 		userNameEditText.setText(PersistenceManager.getInstance(
@@ -60,15 +65,27 @@ public class LoginActivity extends MainBaseActivity {
 				LoginActivity.this).getPassword());
 		loginBtn = (Button) findViewById(R.id.login_login);
 		settingButton = (Button) findViewById(R.id.login_setting);
+		/**
+		 * 设置监听事件
+		 */
 		settingButton.setOnClickListener(listener);
 		loginBtn.setOnClickListener(listener);
+		UserConstant.admin = null;
+		UserConstant.diseaseCategories = null;
+		UserConstant.diseaseTypes = null;
 	}
 
+	/**
+	 * 监听事件
+	 */
 	OnClickListener listener = new OnClickListener() {
 
 		@Override
 		public void onClick(View v) {
 			switch (v.getId()) {
+			/**
+			 * 这里是登录请求的事件
+			 */
 			case R.id.login_login:// 登录按钮事件执行
 				userNameString = userNameEditText.getEditableText().toString();
 				passwordString = passwordEditText.getEditableText().toString();
@@ -76,15 +93,21 @@ public class LoginActivity extends MainBaseActivity {
 					SystemUtils.MToast("请输入完整的账号密码", LoginActivity.this);
 					return;
 				}
-				RequestParams requestParams = new RequestParams();
+				/**
+				 * 这里是正式的HTTP请求了
+				 */
+				RequestParams requestParams = new RequestParams();// 设置请求参数
 				requestParams.add("admin.username", userNameString);
 				requestParams.add("admin.password", passwordString);
+				/**
+				 * 通过这个BaseConnectTemplet，这是一个加载数据的公共类，他在加载的时候，会弹出一个对话框
+				 */
 				BaseConnectTemplet<UserMessage> baseConnectTemplet = new BaseConnectTemplet<>(
 						LoginActivity.this, "提示", "正在登陆", httpConnectReciver,
 						requestParams, HTTPConstant.LOGIN_URL,
 						new TypeToken<UserMessage>() {
 						}.getType());
-				baseConnectTemplet.setProgressView();
+				baseConnectTemplet.setProgressViewCanCancel();
 				baseConnectTemplet.getData();
 				break;
 			case R.id.login_setting:// 跳转到设置界面
@@ -98,17 +121,25 @@ public class LoginActivity extends MainBaseActivity {
 		}
 
 	};
+	/**
+	 * 这里是请求的回掉函数
+	 */
 	HttpConnectReciver<UserMessage> httpConnectReciver = new HttpConnectReciver<UserMessage>() {
 
 		@Override
 		public void onSuccess(UserMessage t,
 				com.jun.android_frame.entity.BaseEntity baseEntity) {
 			if (baseEntity.getStatus() == 1) {// 成功
-				UserConstant.admin = t.getAdmin();
-				UserConstant.diseaseCategories = (List<DiseaseCategory>) t.getDiseaseCategories();
-				UserConstant.diseaseTypes = (List<DiseaseType>) t.getDiseaseTypes();
-				PersistenceManager.getInstance(LoginActivity.this).putUserName(userNameString);
-				PersistenceManager.getInstance(LoginActivity.this).putPassorw(passwordString);
+				PersistenceManager.getInstance(LoginActivity.this).putAdmin(
+						t.getAdmin());
+				PersistenceManager.getInstance(LoginActivity.this)
+						.putDiseaseCatogory(t.getDiseaseCategoryList());
+				PersistenceManager.getInstance(LoginActivity.this)
+						.putDiseaseType(t.getDiseaseTypeList());
+				PersistenceManager.getInstance(LoginActivity.this).putUserName(
+						userNameString);
+				PersistenceManager.getInstance(LoginActivity.this).putPassorw(
+						passwordString);
 				SystemUtils.intentToAnotherActivity(LoginActivity.this,
 						MainActivity.class);
 				finish();

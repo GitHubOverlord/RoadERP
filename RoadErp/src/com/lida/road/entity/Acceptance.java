@@ -25,7 +25,7 @@ public class Acceptance implements Serializable {
 	/**工程金额差*/
 	private Double hdCost;
 	/**验收时间*/
-	private Date acceptanceDate;
+	private String acceptanceDate;
 	/**工务科审核意见*/
 	private String workBranchRemark;
 	/**工务科审核意见*/
@@ -79,10 +79,10 @@ public class Acceptance implements Serializable {
 	public void setHdCost(Double hdCost) {
 		this.hdCost = hdCost;
 	}
-	public Date getAcceptanceDate() {
+	public String getAcceptanceDate() {
 		return acceptanceDate;
 	}
-	public void setAcceptanceDate(Date acceptanceDate) {
+	public void setAcceptanceDate(String acceptanceDate) {
 		this.acceptanceDate = acceptanceDate;
 	}
 	public String getWorkBranchRemark() {

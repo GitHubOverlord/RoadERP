@@ -3,14 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal" >
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="附件"
-        android:textSize="@dimen/text_max" />
-
-    <GridView
+    <com.jun.android_frame.view.MyGridView
         android:id="@+id/picture_gridView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -19,6 +12,6 @@
         android:numColumns="auto_fit"
         android:columnWidth="100dp"
         android:verticalSpacing="15dp" >
-    </GridView>
+    </com.jun.android_frame.view.MyGridView>
 
 </LinearLayout>

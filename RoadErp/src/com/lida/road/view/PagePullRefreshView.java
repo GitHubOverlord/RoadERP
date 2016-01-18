@@ -33,7 +33,7 @@ public class PagePullRefreshView<T> implements IPullRefreshListTemplet,
 	private int page;
 	private boolean isHead = true;
 	private Type type;
-
+	
 	public PagePullRefreshView(PullToRefreshListView pullToRefreshListView,
 			BaseAdapter adapter, Context c, String url,
 			RequestParams requestParams, List<T> list, Type type) {
@@ -99,6 +99,9 @@ public class PagePullRefreshView<T> implements IPullRefreshListTemplet,
 							return;
 						}
 						list.addAll((Collection<? extends T>) t.getList());
+						if (list.size() == 0) {
+							SystemUtils.MToast("没有任何数据", c);
+						}
 						System.out.println("pullrefresh view list size:"
 								+ list.size());
 						adapter.notifyDataSetChanged();

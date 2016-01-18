@@ -24,6 +24,7 @@
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:background="@drawable/only_login_selector"
             android:text="搜索"
             android:textSize="@dimen/text_max" />
     </RelativeLayout>

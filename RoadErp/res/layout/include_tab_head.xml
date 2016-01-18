@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="58dp"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
     android:orientation="vertical" >
 
-    <Button
+
+    <TextView
         android:id="@+id/tv_tab_head"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="TextView" />
+        android:layout_height="58dp" 
+        android:text="首页"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textSize="@dimen/text_max"
+        android:background="@drawable/tab_home_btn"
+        >
+    </TextView>
 
-</RelativeLayout>
+</LinearLayout>

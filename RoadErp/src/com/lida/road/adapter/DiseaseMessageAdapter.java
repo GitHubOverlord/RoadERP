@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.lida.road.R;
 import com.lida.road.entity.DiseaseRecord;
+import com.lida.road.utils.DataUtil;
 
 public class DiseaseMessageAdapter extends BaseAdapter {
 	private Context context;
@@ -62,13 +63,16 @@ public class DiseaseMessageAdapter extends BaseAdapter {
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
-		viewHolder.orderNumber
-				.setText("单号：" + diseaseRecord.getId() == null ? ""
-						: diseaseRecord.getId());
-		viewHolder.stakeNumber.setText("桩号：" + diseaseRecord.getStake());
-		viewHolder.approvedStatus.setText("审批状态"
-				+ diseaseRecord.getFlowStatusName() == null ? ""
-				: diseaseRecord.getFlowStatusName());
+		viewHolder.date.setText("日期:"
+				+ DataUtil.parseStringDate("yyyy-MM-dd",
+						diseaseRecord.getReportTime()));
+		viewHolder.orderNumber.setText("单号:"
+				+ (diseaseRecord.getId() == null ? "未填写" : diseaseRecord
+						.getSn()));
+		viewHolder.stakeNumber.setText("桩号:" + diseaseRecord.getStake());
+		viewHolder.approvedStatus.setText("审批状态:"
+				+ (diseaseRecord.getFlowStatusName() == null ? "未填写"
+						: diseaseRecord.getFlowStatusName()));
 		return convertView;
 	}
 }

@@ -4,8 +4,9 @@ import java.util.List;
 
 public class UserMessage {
 	private Admin admin;
-	private List<DiseaseCategory> diseaseCategories;
-	private List<DiseaseType> diseaseTypes;
+	private List<DiseaseCategory> diseaseCategoryList;
+	private List<DiseaseType> diseaseTypeList;
+	
 	public UserMessage(){
 		
 	}
@@ -13,8 +14,8 @@ public class UserMessage {
 			List<DiseaseType> diseaseTypes) {
 		super();
 		this.admin = admin;
-		this.diseaseCategories = diseaseCategories;
-		this.diseaseTypes = diseaseTypes;
+		this.diseaseCategoryList = diseaseCategories;
+		this.diseaseTypeList = diseaseTypes;
 	}
 	public Admin getAdmin() {
 		return admin;
@@ -22,17 +23,18 @@ public class UserMessage {
 	public void setAdmin(Admin admin) {
 		this.admin = admin;
 	}
-	public List<DiseaseCategory> getDiseaseCategories() {
-		return diseaseCategories;
+	public List<DiseaseCategory> getDiseaseCategoryList() {
+		return diseaseCategoryList;
 	}
-	public void setDiseaseCategories(List<DiseaseCategory> diseaseCategories) {
-		this.diseaseCategories = diseaseCategories;
+	public void setDiseaseCategoryList(List<DiseaseCategory> diseaseCategoryList) {
+		this.diseaseCategoryList = diseaseCategoryList;
 	}
-	public List<DiseaseType> getDiseaseTypes() {
-		return diseaseTypes;
+	public List<DiseaseType> getDiseaseTypeList() {
+		return diseaseTypeList;
 	}
-	public void setDiseaseTypes(List<DiseaseType> diseaseTypes) {
-		this.diseaseTypes = diseaseTypes;
+	public void setDiseaseTypeList(List<DiseaseType> diseaseTypeList) {
+		this.diseaseTypeList = diseaseTypeList;
 	}
+	
 	
 }

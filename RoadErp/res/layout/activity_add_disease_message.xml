@@ -29,11 +29,12 @@
                     android:textSize="@dimen/text_max" />
 
                 <EditText
-                    android:id="@+id/login_user_name"
+                    android:id="@+id/et_disease_number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:hint="" />
+                    android:hint=""
+                    android:singleLine="true" />
             </LinearLayout>
 
             <LinearLayout
@@ -54,7 +55,8 @@
                     android:id="@+id/disease_road_number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ems="10" />
+                    android:ems="10"
+                    android:singleLine="true" />
             </LinearLayout>
 
             <LinearLayout
@@ -72,9 +74,12 @@
                     android:textSize="@dimen/text_max" />
 
                 <EditText
+                    android:id="@+id/et_stake_number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ems="10" />
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    android:singleLine="true" />
             </LinearLayout>
 
             <LinearLayout
@@ -130,14 +135,21 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="病害类型"
+                    android:text="病害类型:"
                     android:textSize="@dimen/text_max" />
 
-                <ListView
-                    android:id="@+id/disease_type"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" >
-                </ListView>
+                <TextView
+                    android:id="@+id/tv_disease_type_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_max" />
+
+                <Button
+                    android:id="@+id/btn_choice_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/only_login_selector"
+                    android:text="选择" />
             </LinearLayout>
 
             <LinearLayout
@@ -154,7 +166,8 @@
                     android:text="病害位置"
                     android:textSize="@dimen/text_max" />
 
-                <EditText
+                <Spinner
+                    android:id="@+id/disease_position"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10" />
@@ -175,9 +188,11 @@
                     android:textSize="@dimen/text_max" />
 
                 <EditText
+                    android:id="@+id/suggestion_fix"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ems="10" />
+                    android:ems="10"
+                    android:singleLine="true" />
             </LinearLayout>
 
             <LinearLayout
@@ -195,9 +210,12 @@
                     android:textSize="@dimen/text_max" />
 
                 <EditText
+                    android:id="@+id/work_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ems="10" />
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    android:singleLine="true" />
             </LinearLayout>
 
             <LinearLayout
@@ -215,9 +233,11 @@
                     android:textSize="@dimen/text_max" />
 
                 <EditText
+                    android:id="@+id/measurement_unit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ems="10" />
+                    android:ems="10"
+                    android:singleLine="true" />
             </LinearLayout>
 
             <LinearLayout
@@ -235,9 +255,12 @@
                     android:textSize="@dimen/text_max" />
 
                 <EditText
+                    android:id="@+id/estimated_amount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ems="10" />
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    android:singleLine="true" />
             </LinearLayout>
 
             <LinearLayout
@@ -246,7 +269,8 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="30dp"
-                android:orientation="horizontal" >
+                android:orientation="horizontal"
+                android:visibility="gone" >
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -255,6 +279,7 @@
                     android:textSize="@dimen/text_max" />
 
                 <DatePicker
+                    android:id="@+id/date_picker"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -265,7 +290,8 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="30dp"
-                android:orientation="horizontal" >
+                android:orientation="horizontal"
+                android:visibility="gone" >
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -273,7 +299,8 @@
                     android:text="上报人员"
                     android:textSize="@dimen/text_max" />
 
-                <EditText
+                <TextView
+                    android:id="@+id/people_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10" />
@@ -285,7 +312,8 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="30dp"
-                android:orientation="horizontal" >
+                android:orientation="horizontal"
+                android:visibility="gone" >
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -293,7 +321,8 @@
                     android:text="上报单位"
                     android:textSize="@dimen/text_max" />
 
-                <EditText
+                <TextView
+                    android:id="@+id/people_belong_enterpris_textView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10" />
@@ -310,13 +339,39 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:inputType="phone"
+                    android:singleLine="true"
                     android:text="电话号码"
                     android:textSize="@dimen/text_max" />
 
                 <EditText
+                    android:id="@+id/phone_number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ems="10" />
+                    android:ems="10"
+                    android:singleLine="true" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="描述"
+                    android:textSize="@dimen/text_max" />
+
+                <EditText
+                    android:id="@+id/remark"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:ems="10"
+                    android:gravity="left" />
             </LinearLayout>
 
             <LinearLayout
@@ -337,31 +392,27 @@
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
                 android:orientation="horizontal" >
 
                 <Button
+                    android:id="@+id/btn_keep"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
                     android:layout_weight="1"
+                    android:background="@drawable/only_login_selector"
                     android:text="保存" />
 
                 <Button
+                    android:id="@+id/btn_report"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
                     android:layout_weight="1"
-                    android:text="结束审批" />
-
-                <Button
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:background="@drawable/only_login_selector"
                     android:text="上报" />
-
-                <Button
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="退回" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

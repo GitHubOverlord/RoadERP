@@ -1,5 +1,8 @@
 package com.lida.road.fragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
@@ -11,32 +14,67 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridView;
 
+import com.jun.android_frame.view.MyGridView;
 import com.jun.frame.utils.SystemUtils;
 import com.lida.road.R;
 import com.lida.road.adapter.AttachmentAdapater;
 
 public class AttachmentFragment extends Fragment {
-	private GridView gridView;
+	private MyGridView gridView;
 	private AttachmentAdapater attachmentAdapater;
 	private View view;
 	public static final String TAG = "fragment_attachment";
+	public static final String BUNDLE_IMG = "bundle_img_url";
 
 	public AttachmentFragment() {
 		super();
+	}
+
+	public AttachmentFragment(List<String> list) {
+
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.fragment_attachment, container, false);
-		gridView = (GridView) view.findViewById(R.id.picture_gridView);
+		gridView = (MyGridView) view.findViewById(R.id.picture_gridView);
 		attachmentAdapater = new AttachmentAdapater(getActivity());
+		Bundle bundle = getArguments();
+		if (bundle != null) {
+			List<String> list = (List<String>) bundle
+					.getSerializable(BUNDLE_IMG);
+			if (list != null) {
+				attachmentAdapater.attachmentUrl.remove(attachmentAdapater.attachmentUrl.size()-1);
+				attachmentAdapater.attachmentUrl.addAll(list);
+				attachmentAdapater.attachmentUrl.add("");
+			}
+		}
 		gridView.setAdapter(attachmentAdapater);
 		return view;
 
 	}
+
+	public List<String> getImgUrls() {
+		List<String> returnPicList = new ArrayList<>();
+		returnPicList.addAll(attachmentAdapater.attachmentUrl);
+		if (returnPicList != null && returnPicList.size() > 0) {
+			returnPicList.remove(returnPicList.size() - 1);
+		}
+		return returnPicList == null ? new ArrayList<String>() : returnPicList;
+	}
+
+//	public void setImgUrls(List<String> list) {
+//		if (attachmentAdapater == null
+//				|| attachmentAdapater.attachmentUrl == null) {
+//			return;
+//		}
+//		attachmentAdapater.attachmentUrl.clear();
+//		attachmentAdapater.attachmentUrl.addAll(list);
+//		attachmentAdapater.attachmentUrl.add("");
+//		attachmentAdapater.notifyDataSetChanged();
+//	}
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -63,6 +101,8 @@ public class AttachmentFragment extends Fragment {
 					System.out.println("总共有："
 							+ attachmentAdapater.attachmentUrl.size() + "数据");
 				}
+			} else {
+				SystemUtils.MToast("选择附件失败！", getActivity());
 			}
 
 		} else if (resultCode == Activity.RESULT_CANCELED) {// 用户点击了取消

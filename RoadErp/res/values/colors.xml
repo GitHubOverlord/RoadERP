@@ -12,4 +12,5 @@
     <color name="bg_head">#f8f7f5</color>
     <color name="head_title">#766666</color>
 	<color name="gloable_color">#FFFFFF</color>
+	 <color name="div">#dbe0e6</color>
 </resources>

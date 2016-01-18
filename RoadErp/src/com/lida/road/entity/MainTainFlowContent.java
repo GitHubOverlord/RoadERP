@@ -42,7 +42,12 @@ public class MainTainFlowContent {
 	public static final String DISEASE_FLOWSTATUS_WORK_MASTER="9";
 	/**养护病害流程状态-审批结束*/
 	public static final String DISEASE_FLOWSTATUS_FINISH="999";
-	
+	public static boolean isInspector(String mainTainPost){
+		if (mainTainPost.equals(ROLE_STATION_PATROL) || mainTainPost.equals(ROLE_COUNTY_WORK_PATROL) || mainTainPost.equals(ROLE_CITY_PATROL)) {
+			return true;
+		}
+		return false;
+	}
 	/***
 	 * 根据病害审批状态返回审批环节名称
 	 * @param status

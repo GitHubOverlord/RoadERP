@@ -1,6 +1,7 @@
 package com.lida.road.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 /***
  * 日常养护-病害信息单
@@ -13,7 +14,7 @@ public class DiseaseRecord implements Serializable{
 	public static final String Upload_Dir = "/diseaseRecord";//日常养护的病害信息的图片放这里
 	/**id*/
 	private String id;
-	/**路线编号*/
+	/**病害编号*/
 	private String sn;
 	/**路线编号*/
 	private String routeCode;
@@ -23,7 +24,7 @@ public class DiseaseRecord implements Serializable{
 	private String diseaseLevel;
 	/**病害部位*/
 	private String diseasePart;
-	/**病害类型*/
+	/**病害类型，以分号串联起来*/
 	private String diseaseType;
 	/**病害位置*/
 	private String diseasePosition;
@@ -35,7 +36,7 @@ public class DiseaseRecord implements Serializable{
 	private String estimatingUnit;
 	/**估算金额（元）*/
 	private Double estimatingCost;
-	/**上报时间*/
+	/**上报时间，原生的date*/
 	private String reportTime;
 	/**上报单位*/
 	private String orgName;
@@ -57,6 +58,8 @@ public class DiseaseRecord implements Serializable{
 	private String flowStatus;
 	/**审核状态-环节的名称*/
 	private String flowStatusName;
+	private String localCacheId;
+	private List<String> attachmentUrls;
 	public String getId() {
 		return id;
 	}
@@ -206,6 +209,57 @@ public class DiseaseRecord implements Serializable{
 	}
 	public void setSn(String sn) {
 		this.sn = sn;
+	}
+	public String getLocalCacheId() {
+		return localCacheId;
+	}
+	public void setLocalCacheId(String localCacheId) {
+		this.localCacheId = localCacheId;
+	}
+	public List<String> getAttachmentUrls() {
+		return attachmentUrls;
+	}
+	public void setAttachmentUrls(List<String> attachmentUrls) {
+		this.attachmentUrls = attachmentUrls;
+	}
+	public DiseaseRecord(String id, String sn, String routeCode, Double stake,
+			String diseaseLevel, String diseasePart, String diseaseType,
+			String diseasePosition, String estimatingScheme,
+			Double estimatingJob, String estimatingUnit, Double estimatingCost,
+			String reportTime, String orgName, String orgId, String reportorId,
+			String reportorName, String reportorPhone, String missionFrom,
+			String missionFromName, String remark, String flowStatus,
+			String flowStatusName, String localCacheId,
+			List<String> attachmentUrls) {
+		super();
+		this.id = id;
+		this.sn = sn;
+		this.routeCode = routeCode;
+		this.stake = stake;
+		this.diseaseLevel = diseaseLevel;
+		this.diseasePart = diseasePart;
+		this.diseaseType = diseaseType;
+		this.diseasePosition = diseasePosition;
+		this.estimatingScheme = estimatingScheme;
+		this.estimatingJob = estimatingJob;
+		this.estimatingUnit = estimatingUnit;
+		this.estimatingCost = estimatingCost;
+		this.reportTime = reportTime;
+		this.orgName = orgName;
+		this.orgId = orgId;
+		this.reportorId = reportorId;
+		this.reportorName = reportorName;
+		this.reportorPhone = reportorPhone;
+		this.missionFrom = missionFrom;
+		this.missionFromName = missionFromName;
+		this.remark = remark;
+		this.flowStatus = flowStatus;
+		this.flowStatusName = flowStatusName;
+		this.localCacheId = localCacheId;
+		this.attachmentUrls = attachmentUrls;
+	}
+	public DiseaseRecord() {
+		super();
 	}
 	
 	

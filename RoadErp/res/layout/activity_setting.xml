@@ -53,6 +53,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:text="保存"
+        android:background="@drawable/only_login_selector"
         android:layout_marginTop="30dp" />
 
     <Button
@@ -60,6 +61,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
+        android:background="@drawable/only_login_selector"
         android:layout_marginRight="15dp"
         android:layout_marginTop="8dp"
         android:text="取消" />
