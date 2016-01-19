@@ -14,11 +14,13 @@
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="@dimen/text_max"
             android:text="退回意见" />
 
         <EditText
             android:id="@+id/et_message"
             android:layout_width="fill_parent"
+            android:textSize="@dimen/text_max"
             android:layout_height="200dp" />
     </LinearLayout>
 

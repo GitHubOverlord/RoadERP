@@ -52,7 +52,7 @@ public class ReturnBackActivity extends MainBaseActivity {
 	private void initView() {
 		setActionBar(R.layout.include_head_textbtn);
 		setActionBarWidgetResource(ViewIdConstant.ACTIONBAR_TITLE,
-				ResourceConstant.ACTIONBAR_TITLE, "回退");
+				ResourceConstant.ACTIONBAR_TITLE, "退回");
 		BackImageView backImageView = (BackImageView) getActionBarViewByMarkId(
 				ViewIdConstant.ACTIONBAR_BACK_IAMGEVIEW,
 				ResourceConstant.ACTIONBAR_BACK_IMAGEVIEW);

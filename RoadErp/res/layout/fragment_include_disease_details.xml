@@ -7,6 +7,9 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/shape_login_btn_selector"
+        android:padding="5dp"
+        android:layout_marginRight="15dp"
         android:layout_marginTop="15dp" >
 
         <TextView
@@ -15,6 +18,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:textSize="@dimen/text_max"
+            android:textColor="@color/white"
             android:text="病害信息详情" />
 
         <TextView
@@ -25,6 +29,7 @@
             android:layout_centerVertical="true"
             android:textSize="@dimen/text_max"
             android:layout_marginRight="15dp"
+            android:textColor="@color/white"
             android:text="展开" />
     </RelativeLayout>
 

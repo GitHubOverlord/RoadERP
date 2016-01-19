@@ -2,10 +2,6 @@ package com.lida.road.activity.disease;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.HashMap;
-import java.util.Map;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,7 +13,6 @@ import android.widget.TextView;
 
 import com.google.gson.reflect.TypeToken;
 import com.jun.android_frame.activity.MainBaseActivity;
-import com.jun.android_frame.constant.Constant;
 import com.jun.android_frame.constant.ResourceConstant;
 import com.jun.android_frame.entity.BaseEntity;
 import com.jun.android_frame.http.base.BaseConnectTemplet;
@@ -31,7 +26,6 @@ import com.lida.road.constant.HTTPConstant;
 import com.lida.road.constant.ViewIdConstant;
 import com.lida.road.entity.DiseaseRecord;
 import com.lida.road.entity.UserMessage;
-import com.lida.road.utils.DataUtil;
 import com.lida.road.utils.StringAdapter;
 import com.loopj.android.http.RequestParams;
 
@@ -145,10 +139,13 @@ public class DiseaseReportActivity extends MainBaseActivity {
 				} else if (mark == BUNDLE_FROM_DISEASE_EDIT) {// 从病害信息编辑页面来的，需要提交整个病害信息表，以及病害信息意见和审批人
 					DiseaseRecord diseaseRecord = (DiseaseRecord) bundle
 							.getSerializable(BUNDLE_VALUE_DISEASE_MESSAGE);
-					String[] filePath = (String[]) diseaseRecord
-							.getAttachmentUrls().toArray(
-									new String[diseaseRecord
-											.getAttachmentUrls().size()]);
+					String[] filePath = new String[diseaseRecord
+							.getAttachmentUrls().size()];
+					for (int i = 0; i < diseaseRecord.getAttachmentUrls()
+							.size(); i++) {
+						filePath[i] = diseaseRecord.getAttachmentUrls().get(i)
+								.getPath();
+					}
 					RequestParams params = new RequestParams();
 					params.put("deviceType", "momobile");
 					params.put("stepType", "next");// 下一步流程

@@ -1,5 +1,7 @@
 package com.lida.road.activity.accept;
 
+import java.io.Serializable;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -113,7 +115,7 @@ public class AcceptDetailsActivity extends MainBaseActivity {
 				hdJobEditText.setEnabled(false);
 				hdUnitEditText.setEnabled(false);
 				hdCostEditText.setEnabled(false);
-				workManagerRemarkEditText.setEnabled(false);
+				workManagerRemarkLayout.setVisibility(View.GONE);
 				if (!(flowStatus
 						.equals(MainTainFlowContent.ACCEPTANCE_FLOWSTATUS_WORK_BRANCH))) {// 如果当前状态不是工务科审批，那么我们就让上报退回按钮变消失状态
 					reportBtn.setVisibility(View.GONE);
@@ -139,7 +141,7 @@ public class AcceptDetailsActivity extends MainBaseActivity {
 	private void initView() {
 		setActionBar(R.layout.include_head_textbtn);
 		setActionBarWidgetResource(ViewIdConstant.ACTIONBAR_TITLE,
-				ResourceConstant.ACTIONBAR_TITLE, "验收单详情");
+				ResourceConstant.ACTIONBAR_TITLE, "验收管理详情");
 		BackImageView backImageView = (BackImageView) getActionBarViewByMarkId(
 				ViewIdConstant.ACTIONBAR_BACK_IAMGEVIEW,
 				ResourceConstant.ACTIONBAR_BACK_IMAGEVIEW);
@@ -322,6 +324,9 @@ public class AcceptDetailsActivity extends MainBaseActivity {
 				bundle.putSerializable(
 						DiseaseMessageFragment.BUNDLE_DISEASE_MESSAGE, t
 								.getAcceptance().getDiseaseRecord());
+				bundle.putSerializable(
+						DiseaseMessageFragment.BUNDLE_DISEASE_ATTACHMENT, (Serializable) t
+								.getAffixConstructionList());
 				diseaseMessageFragment.setArguments(bundle);
 				constructionMessageFragment = new ConstructionMessageFragment(t
 						.getAcceptance().getConstruction(),

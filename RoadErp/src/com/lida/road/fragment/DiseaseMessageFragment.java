@@ -1,5 +1,7 @@
 package com.lida.road.fragment;
 
+import java.util.List;
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.lida.road.R;
+import com.lida.road.entity.AffixFile;
 import com.lida.road.entity.DiseaseRecord;
 import com.lida.road.utils.StringAdapter;
 
@@ -22,13 +25,16 @@ public class DiseaseMessageFragment extends Fragment {
 	private View view;
 	private DiseaseRecord diseaseRecord;
 	public static final String BUNDLE_DISEASE_MESSAGE = "disease_message";
+	public static final String BUNDLE_DISEASE_ATTACHMENT = "disease_message_attachment";
 	public static final String TAG = "disease_message_fragment";
 	private TextView diseaseNumber, routeNumber, stakeNumber, diseaseLevel,
 			diseaseCatogory, diseaseType, diseasePosition, suggestFix,
 			workDate, measurementUnit, estimatedAmount, reportTime,
 			reportPeople, reportEnterpris, phoneNumber;
 	private ImgGridViewFragment imgGridViewFragment;
+	private List<AffixFile> affixFiles;
 	private boolean shouSpread = false;
+
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
@@ -36,6 +42,8 @@ public class DiseaseMessageFragment extends Fragment {
 				container, false);
 		diseaseRecord = (DiseaseRecord) getArguments().getSerializable(
 				BUNDLE_DISEASE_MESSAGE);
+		affixFiles = (List<AffixFile>) getArguments().getSerializable(
+				BUNDLE_DISEASE_ATTACHMENT);
 		diseaseNumber = (TextView) view.findViewById(R.id.disease_number);
 		routeNumber = (TextView) view.findViewById(R.id.route_number);
 		stakeNumber = (TextView) view.findViewById(R.id.stake_number);
@@ -57,8 +65,7 @@ public class DiseaseMessageFragment extends Fragment {
 				.findViewById(R.id.construction_details_spread);
 		expandDiseaseMessageLayout.setOnClickListener(listener);
 		setDateToView(diseaseRecord);
-		imgGridViewFragment = new ImgGridViewFragment(
-				diseaseRecord.getAttachmentUrls());
+		imgGridViewFragment = new ImgGridViewFragment(affixFiles);
 		addFragment(imgGridViewFragment, ImgGridViewFragment.TAG,
 				R.id.fragment_disease_img);
 		if (shouSpread) {
@@ -77,7 +84,7 @@ public class DiseaseMessageFragment extends Fragment {
 
 	public void openDiseaseMessage() {
 		shouSpread = true;
-		
+
 	}
 
 	/**

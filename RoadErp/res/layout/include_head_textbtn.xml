@@ -16,7 +16,7 @@
             android:layout_centerInParent="true"
             android:text="有位车主"
             android:textColor="@color/head_title"
-            android:textSize="@dimen/title_text_size" />
+            android:textSize="@dimen/text_max" />
 
         <com.jun.android_frame.view.BackImageView
             android:id="@+id/head_back"
@@ -38,7 +38,7 @@
             android:layout_marginRight="@dimen/back_btn_marginleft"
             android:layout_marginTop="8dp"
             android:textColor="@color/head_title"
-            android:textSize="@dimen/head_text_btn" />
+            android:textSize="@dimen/text_max" />
     </RelativeLayout>
 
 </RelativeLayout>

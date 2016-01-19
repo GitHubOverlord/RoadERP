@@ -30,7 +30,7 @@ public class DiseaseMessageActivity extends MainBaseActivity {
 	private void initView() {
 		setActionBar(R.layout.include_head_textbtn);
 		setActionBarWidgetResource(ViewIdConstant.ACTIONBAR_TITLE,
-				ResourceConstant.ACTIONBAR_TITLE, "病害信息");
+				ResourceConstant.ACTIONBAR_TITLE, "巡查上报信息");
 		BackImageView backImageView = (BackImageView) getActionBarViewByMarkId(
 				ViewIdConstant.ACTIONBAR_BACK_IAMGEVIEW,
 				ResourceConstant.ACTIONBAR_BACK_IMAGEVIEW);
@@ -40,7 +40,7 @@ public class DiseaseMessageActivity extends MainBaseActivity {
 		mTabHost.setup(this, getSupportFragmentManager(), R.id.realtabcontent);
 
 		// 添加tab名称和图标
-		indicator = getIndicatorView("等待审批");
+		indicator = getIndicatorView("等待审批记录");
 		mTabHost.addTab(mTabHost.newTabSpec("accept").setIndicator(indicator),
 				AcceptDiseaseListFragment.class, null);
 		
@@ -67,7 +67,7 @@ public class DiseaseMessageActivity extends MainBaseActivity {
 		TextView textView = (TextView) getActionBarViewByMarkId(
 				ViewIdConstant.ACTIONBAR_RIGHT_BUTTON,
 				ResourceConstant.ACTIONBAR_RIGHT_VIEW);
-		textView.setText("添加");
+		textView.setText("添加巡查记录");
 		textView.setOnClickListener(listener);
 		if (MainTainFlowContent.isInspector(authority)) {
 			textView.setVisibility(View.VISIBLE);

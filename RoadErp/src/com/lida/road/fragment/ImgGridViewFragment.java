@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.jun.android_frame.view.MyGridView;
 import com.lida.road.R;
 import com.lida.road.adapter.ImgGridViewAdapter;
+import com.lida.road.entity.AffixFile;
 
 /**
  * 专门用来显示图片的fragment
@@ -26,9 +27,9 @@ public class ImgGridViewFragment extends Fragment {
 	private View view;
 	public static final String TAG = "fragment_img_grid_view";
 	public static final String BUNDLE_IMG_URL = "img_url";
-	private List<String> list;
+	private List<AffixFile> list;
 
-	public ImgGridViewFragment(List<String> list) {
+	public ImgGridViewFragment(List<AffixFile> list) {
 		this.list = list;
 	}
 
@@ -47,11 +48,11 @@ public class ImgGridViewFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		if (getArguments() != null) {
-			list = (List<String>) getArguments()
-					.getSerializable(BUNDLE_IMG_URL);
+			list = (List<AffixFile>) getArguments().getSerializable(
+					BUNDLE_IMG_URL);
 		}
 		if (list == null) {
-			list = new ArrayList<String>();
+			list = new ArrayList<AffixFile>();
 		}
 
 		view = inflater.inflate(R.layout.fragment_img_grid_view, container,
@@ -63,7 +64,7 @@ public class ImgGridViewFragment extends Fragment {
 
 	}
 
-	public List<String> getImgUrls() {
+	public List<AffixFile> getImgUrls() {
 		return list;
 	}
 }

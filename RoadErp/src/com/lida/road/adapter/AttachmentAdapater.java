@@ -26,10 +26,11 @@ import com.jun.frame.utils.MediaFile;
 import com.jun.frame.utils.VedioThumbnailUtil;
 import com.jun.frame.utils.ViewUtils;
 import com.lida.road.R;
+import com.lida.road.entity.AffixFile;
 
 public class AttachmentAdapater extends BaseAdapter {
 	private Context context;
-	public List<String> attachmentUrl = new ArrayList<String>();
+	public List<AffixFile> attachmentUrl = new ArrayList<AffixFile>();
 	private LayoutInflater layoutInflater;
 	private String choicePicuterRemind[] = { "录制视频", "拍照", "从本地选择" };
 	public static final int REQUEST_VEDIO_CODE = 555;
@@ -39,7 +40,7 @@ public class AttachmentAdapater extends BaseAdapter {
 	public AttachmentAdapater(Context context) {
 		this.context = context;
 		layoutInflater = LayoutInflater.from(context);
-		attachmentUrl.add("");
+		attachmentUrl.add(new AffixFile());
 	}
 
 	@Override
@@ -70,18 +71,17 @@ public class AttachmentAdapater extends BaseAdapter {
 		if (position == attachmentUrl.size() - 1) {
 			imageView.setBackgroundResource(R.drawable.icon_camera);
 		} else {
-			String fileName = attachmentUrl.get(position);
+			String fileName = attachmentUrl.get(position).getPath();
 			boolean isAudio = MediaFile.isVideoFileType(fileName);
 			Bitmap bm;
 			if (isAudio) {// 判断是文件还是视频
 				VedioThumbnailUtil vedioThumbnailUtil = new VedioThumbnailUtil();
 				bm = vedioThumbnailUtil.getVideoThumbnail(fileName);
 			} else {
-				bm = BitmapFactory.decodeFile(fileName);
+				BitmapUtilities bitmapUtilities = new BitmapUtilities();
+				bm = bitmapUtilities.getBitmapThumbnail(fileName, 160, 160);
 			}
-			BitmapUtilities bitmapUtilities = new BitmapUtilities();
-			ViewUtils viewUtils = new ViewUtils(imageView);
-			bm = bitmapUtilities.getBitmapThumbnail(bm, 160, 160);
+
 			Drawable drawable = new BitmapDrawable(bm);
 			imageView.setBackgroundDrawable(drawable);
 		}
@@ -113,12 +113,6 @@ public class AttachmentAdapater extends BaseAdapter {
 									case 1:// 拍照
 										Intent intent1 = new Intent(
 												MediaStore.ACTION_IMAGE_CAPTURE);
-//										File out = new File(Environment
-//												.getExternalStorageDirectory(),
-//												UUID.randomUUID() + ".jpg");
-//										Uri uri = Uri.fromFile(out);
-//										intent1.putExtra(
-//												MediaStore.EXTRA_OUTPUT, uri);
 										((Activity) context)
 												.startActivityForResult(
 														intent1,

@@ -1,9 +1,11 @@
 package com.lida.road.utils;
 
+import java.util.Date;
 import java.util.List;
 
 import android.content.Context;
 
+import com.jun.frame.utils.SystemUtils;
 import com.lida.road.constant.UserConstant;
 import com.lida.road.entity.DiseaseCategory;
 
@@ -51,5 +53,19 @@ public class StringAdapter {
 			}
 		}
 		return "";
+	}
+	/**
+	 * 根据路线编号生成病害编号
+	 */
+	public static String getDiseaseNumberByRouteNumber(String number){
+		if (number == null || number.equals("")) {
+			return "";
+		}
+		Date date = new Date();
+		@SuppressWarnings("deprecation")
+		String dateString = ""+date.getYear()+date.getMonth()+date.getDay()+date.getHours()+date.getMinutes()+date.getSeconds()+"";
+		String string = "XC"+"["+number+"]"+dateString;
+		return string;
+
 	}
 }

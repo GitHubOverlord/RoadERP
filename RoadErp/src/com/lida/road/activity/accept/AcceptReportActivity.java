@@ -63,7 +63,7 @@ public class AcceptReportActivity extends MainBaseActivity {
 	private void initView() {
 		setActionBar(R.layout.include_head_textbtn);
 		setActionBarWidgetResource(ViewIdConstant.ACTIONBAR_TITLE,
-				ResourceConstant.ACTIONBAR_TITLE, "上报");
+				ResourceConstant.ACTIONBAR_TITLE, "验收任务上报");
 		BackImageView backImageView = (BackImageView) getActionBarViewByMarkId(
 				ViewIdConstant.ACTIONBAR_BACK_IAMGEVIEW,
 				ResourceConstant.ACTIONBAR_BACK_IMAGEVIEW);
@@ -146,13 +146,14 @@ public class AcceptReportActivity extends MainBaseActivity {
 				SystemUtils.MToast("上报失败！", AcceptReportActivity.this);
 			} else if (status == 1) {
 				SystemUtils.MToast("上报成功", AcceptReportActivity.this);
+				finish();
 			} else if (status == 2) {
 				SystemUtils.MToast("权限不足", AcceptReportActivity.this);
 			} else if (status == 3) {
 				SystemUtils
 						.MToast("您未登录或登录过期，请重新登陆", AcceptReportActivity.this);
 			}
-
+			
 		}
 
 		@Override

@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.jun.frame.utils.SystemUtils;
 import com.lida.road.R;
+import com.lida.road.entity.AffixFile;
 import com.lida.road.entity.Construction;
 
 public class ConstructionMessageFragment extends Fragment {
@@ -23,15 +24,15 @@ public class ConstructionMessageFragment extends Fragment {
 	private ImgGridViewFragment constructionImgViewFragment,
 			supervisionImgGridViewFragment;
 	private Construction construction;
-	private List<String> constructionList;
-	private List<String> supervisionList;
+	private List<AffixFile> constructionList;
+	private List<AffixFile> supervisionList;
 	private TextView remarkTextView, dateTextView, spreadConstructionTextView;
 	private LinearLayout constructionLayout;
 	private boolean shouldSpread = false;
 	public static final String TAG = "construction_message_fragment";
 
 	public ConstructionMessageFragment(Construction construction,
-			List<String> constructionList, List<String> supervisionList) {
+			List<AffixFile> constructionList, List<AffixFile> supervisionList) {
 		this.construction = construction;
 		this.constructionList = constructionList;
 		this.supervisionList = supervisionList;

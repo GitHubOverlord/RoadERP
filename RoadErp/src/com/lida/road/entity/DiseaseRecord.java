@@ -59,7 +59,7 @@ public class DiseaseRecord implements Serializable{
 	/**审核状态-环节的名称*/
 	private String flowStatusName;
 	private String localCacheId;
-	private List<String> attachmentUrls;
+	private List<AffixFile> attachmentUrls;
 	public String getId() {
 		return id;
 	}
@@ -216,10 +216,10 @@ public class DiseaseRecord implements Serializable{
 	public void setLocalCacheId(String localCacheId) {
 		this.localCacheId = localCacheId;
 	}
-	public List<String> getAttachmentUrls() {
+	public List<AffixFile> getAttachmentUrls() {
 		return attachmentUrls;
 	}
-	public void setAttachmentUrls(List<String> attachmentUrls) {
+	public void setAttachmentUrls(List<AffixFile> attachmentUrls) {
 		this.attachmentUrls = attachmentUrls;
 	}
 	public DiseaseRecord(String id, String sn, String routeCode, Double stake,
@@ -230,7 +230,7 @@ public class DiseaseRecord implements Serializable{
 			String reportorName, String reportorPhone, String missionFrom,
 			String missionFromName, String remark, String flowStatus,
 			String flowStatusName, String localCacheId,
-			List<String> attachmentUrls) {
+			List<AffixFile> attachmentUrls) {
 		super();
 		this.id = id;
 		this.sn = sn;

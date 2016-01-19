@@ -2,9 +2,9 @@ package com.lida.road.activity.construction;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.Serializable;
 import java.util.List;
 
-import u.aly.bu;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,11 +13,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.reflect.TypeToken;
 import com.jun.android_frame.activity.MainBaseActivity;
@@ -28,14 +24,14 @@ import com.jun.android_frame.inter.HttpConnectReciver;
 import com.jun.android_frame.view.BackImageView;
 import com.jun.frame.utils.SystemUtils;
 import com.lida.road.R;
-import com.lida.road.activity.disease.DiseaseReportActivity;
 import com.lida.road.constant.HTTPConstant;
 import com.lida.road.constant.ViewIdConstant;
+import com.lida.road.entity.AffixFile;
 import com.lida.road.entity.Construction;
-import com.lida.road.entity.DiseaseRecord;
+import com.lida.road.entity.ConstructionAndAttachment;
 import com.lida.road.fragment.AttachmentFragment;
+import com.lida.road.fragment.DiseaseMessageFragment;
 import com.lida.road.utils.DataUtil;
-import com.lida.road.utils.StringAdapter;
 import com.loopj.android.http.RequestParams;
 
 /**
@@ -45,18 +41,10 @@ import com.loopj.android.http.RequestParams;
  * 
  */
 public class ConstructionSupvisionDetailsActivity extends MainBaseActivity {
-
+	private DiseaseMessageFragment diseaseMessageFragment;
 	private AttachmentFragment attachmentFragment;
-	private LinearLayout diseaseMessageLayout;
-	private Construction construction;
+	private ConstructionAndAttachment constructionAndAttachment;
 	public static final String BUNDLE_DISEASE_MESSAGE = "bundle_disease_message";
-	private TextView expandDiseaseMessageLayout;
-	private TextView diseaseNumber, routeNumber, stakeNumber, diseaseLevel,
-
-	diseaseCatogory, diseaseType, diseasePosition, suggestFix, workDate,
-			measurementUnit, estimatedAmount, reportTime, reportPeople,
-			reportEnterpris, phoneNumber;
-
 	AttachmentFragment attachmentFragment1, attachmentFragment2;
 	private Button bcbtn;
 	private EditText cons_jlyj;
@@ -74,7 +62,7 @@ public class ConstructionSupvisionDetailsActivity extends MainBaseActivity {
 	private void initVie() {
 		setActionBar(R.layout.include_head_textbtn);
 		setActionBarWidgetResource(ViewIdConstant.ACTIONBAR_TITLE,
-				ResourceConstant.ACTIONBAR_TITLE, "监理意见填写");
+				ResourceConstant.ACTIONBAR_TITLE, "施工管理-监理意见填写");
 		BackImageView backImageView = (BackImageView) getActionBarViewByMarkId(
 				ViewIdConstant.ACTIONBAR_BACK_IAMGEVIEW,
 				ResourceConstant.ACTIONBAR_BACK_IMAGEVIEW);
@@ -83,29 +71,18 @@ public class ConstructionSupvisionDetailsActivity extends MainBaseActivity {
 		addFragment(attachmentFragment, AttachmentFragment.TAG,
 				R.id.fragment_attendance1);
 		Bundle bundle = getIntent().getExtras();
-		construction = (Construction) bundle
+		constructionAndAttachment = (ConstructionAndAttachment) bundle
 				.getSerializable(BUNDLE_DISEASE_MESSAGE);
-		diseaseMessageLayout = (LinearLayout) findViewById(R.id.lv_disease_message);
-		expandDiseaseMessageLayout = (TextView) findViewById(R.id.construction_details_spread);
-		expandDiseaseMessageLayout.setOnClickListener(listener);
-
-		diseaseNumber = (TextView) findViewById(R.id.disease_number);
-		routeNumber = (TextView) findViewById(R.id.route_number);
-		stakeNumber = (TextView) findViewById(R.id.stake_number);
-		diseaseLevel = (TextView) findViewById(R.id.disease_level);
-		diseaseCatogory = (TextView) findViewById(R.id.disease_catogory);
-		diseasePosition = (TextView) findViewById(R.id.disease_position);
-		diseaseType = (TextView) findViewById(R.id.disease_type);
-		suggestFix = (TextView) findViewById(R.id.suggest_fix);
-		workDate = (TextView) findViewById(R.id.work_date);
-		measurementUnit = (TextView) findViewById(R.id.measurement_unit);
-		estimatedAmount = (TextView) findViewById(R.id.estimated_amount);
-		reportTime = (TextView) findViewById(R.id.report_time);
-		reportPeople = (TextView) findViewById(R.id.report_people);
-		reportEnterpris = (TextView) findViewById(R.id.report_enterpris);
-		phoneNumber = (TextView) findViewById(R.id.report_number);
 		cons_jlyj = (EditText) findViewById(R.id.cons_jlyj);
 		bcbtn = (Button) findViewById(R.id.bc_btn);
+		diseaseMessageFragment = new DiseaseMessageFragment();
+		Bundle diseaseBundle = new Bundle();
+		diseaseBundle.putSerializable(
+				DiseaseMessageFragment.BUNDLE_DISEASE_MESSAGE, constructionAndAttachment.getConstruction().getDiseaseRecord());
+		diseaseBundle.putSerializable(DiseaseMessageFragment.BUNDLE_DISEASE_ATTACHMENT, (Serializable) constructionAndAttachment.getAffixDiseaseRecordList());
+		diseaseMessageFragment.setArguments(diseaseBundle);
+		addFragment(diseaseMessageFragment, DiseaseMessageFragment.TAG,
+				R.id.fragment_construction_disease_details);
 		bcbtn.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -115,7 +92,6 @@ public class ConstructionSupvisionDetailsActivity extends MainBaseActivity {
 				save();
 			}
 		});
-		setDateToView(construction.getDiseaseRecord());
 	}
 
 	private void save() {
@@ -123,11 +99,11 @@ public class ConstructionSupvisionDetailsActivity extends MainBaseActivity {
 		try {
 			RequestParams params = new RequestParams();
 
-			List list = attachmentFragment1.getImgUrls();
+			List<AffixFile> list = attachmentFragment1.getImgUrls();
 			if (null != list && list.size() > 0) {
 				File[] files = new File[list.size()];
 				for (int i = 0; i < list.size(); i++) {
-					files[i] = new File(list.get(i).toString());
+					files[i] = new File(list.get(i).getPath());
 				}
 				params.put("files", files);
 				String fileNames = "";
@@ -141,7 +117,7 @@ public class ConstructionSupvisionDetailsActivity extends MainBaseActivity {
 						ConstructionSupvisionDetailsActivity.this);
 				return;
 			}
-			params.put("construction.id", construction.getId());
+			params.put("construction.id", constructionAndAttachment.getConstruction().getId());
 			params.put("construction.supervisorRemark", cons_jlyj.getText()
 					.toString().trim());
 			params.put("stepType", "finish");
@@ -190,68 +166,6 @@ public class ConstructionSupvisionDetailsActivity extends MainBaseActivity {
 
 		}
 
-	};
-
-	private void setDateToView(DiseaseRecord diseaseRecord) {
-		diseaseNumber.setText(diseaseRecord.getSn() == null ? ""
-				: diseaseRecord.getSn());
-		routeNumber.setText(diseaseRecord.getRouteCode() == null ? ""
-				: diseaseRecord.getRouteCode());
-		stakeNumber.setText(diseaseRecord.getStake() + "");
-		diseaseLevel.setText(diseaseRecord.getDiseaseLevel() == null ? ""
-				: diseaseRecord.getDiseaseLevel());
-		diseaseCatogory.setText(StringAdapter.diseaseCatogoryIdToString(
-				diseaseRecord.getDiseasePart() == null ? "" : diseaseRecord
-						.getDiseasePart(),
-				ConstructionSupvisionDetailsActivity.this));
-		diseaseType.setText(diseaseRecord.getDiseaseType() == null ? ""
-				: diseaseRecord.getDiseaseType());
-		diseasePosition.setText(diseaseRecord.getDiseasePosition() == null ? ""
-				: diseaseRecord.getDiseasePosition());
-		suggestFix.setText(diseaseRecord.getEstimatingScheme() == null ? ""
-				: diseaseRecord.getEstimatingScheme());
-		workDate.setText(diseaseRecord.getEstimatingJob() + "");
-		measurementUnit.setText(diseaseRecord.getEstimatingUnit() == null ? ""
-				: diseaseRecord.getEstimatingUnit());
-		estimatedAmount.setText(diseaseRecord.getEstimatingCost() + "");
-		reportTime.setText(diseaseRecord.getReportTime() == null ? ""
-				: diseaseRecord.getReportTime());
-		reportPeople.setText(diseaseRecord.getReportorName() == null ? ""
-				: diseaseRecord.getReportorName());
-		reportEnterpris.setText(diseaseRecord.getOrgName() == null ? ""
-				: diseaseRecord.getOrgName());
-		phoneNumber.setText(diseaseRecord.getReportorPhone() == null ? ""
-				: diseaseRecord.getReportorPhone());
-	}
-
-	/**
-	 * 增加一个fragment的方法
-	 * 
-	 * @param fragment
-	 * @param tag
-	 *            加载fragment 用的标记，我们可以通过findFragmentByTag这个方法找到fragment
-	 */
-	/**
-	 * 这里是把result结果映射到图片选择的fragment里面去
-	 */
-	OnClickListener listener = new OnClickListener() {
-
-		@Override
-		public void onClick(View arg0) {
-			switch (arg0.getId()) {
-			case R.id.construction_details_spread:
-				if (diseaseMessageLayout.getVisibility() == View.VISIBLE) {// 判断如果是现实状态
-					diseaseMessageLayout.setVisibility(View.GONE);
-
-				} else {
-					diseaseMessageLayout.setVisibility(View.VISIBLE);
-				}
-				break;
-
-			default:
-				break;
-			}
-		}
 	};
 
 	private void initView() {

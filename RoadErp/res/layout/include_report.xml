@@ -14,12 +14,14 @@
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="请选择上报人 " />
+            android:textSize="@dimen/text_max"
+            android:text="请选择上报人: " />
 
         <TextView
             android:id="@+id/tv_report_people"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="@dimen/text_max"
             android:text="" />
 
         <Button
@@ -38,11 +40,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="审批意见" />
+             android:textSize="@dimen/text_max"
+            android:text="意见" />
 
         <EditText
             android:id="@+id/et_report_people"
             android:layout_width="fill_parent"
+             android:textSize="@dimen/text_max"
             android:layout_height="200dp" />
     </LinearLayout>
 

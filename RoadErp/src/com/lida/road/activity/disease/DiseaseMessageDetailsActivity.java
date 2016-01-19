@@ -26,6 +26,7 @@ import com.lida.road.activity.main.ReturnBackActivity;
 import com.lida.road.constant.HTTPConstant;
 import com.lida.road.constant.UserConstant;
 import com.lida.road.constant.ViewIdConstant;
+import com.lida.road.entity.AffixFile;
 import com.lida.road.entity.AttachmentAndDisease;
 import com.lida.road.entity.DiseaseRecord;
 import com.lida.road.entity.MainTainFlowContent;
@@ -51,7 +52,7 @@ public class DiseaseMessageDetailsActivity extends MainBaseActivity {
 			reportPeople, reportEnterpris, phoneNumber;
 	private Button report, returnBack, over;
 	private DiseaseRecord diseaseRecord;
-	private List<String> attachments;
+	private List<AffixFile> attachments;
 	private AttachmentAndDisease attachmentAndDisease;
 	private ImgGridViewFragment imgGridViewFragment;
 
@@ -65,7 +66,7 @@ public class DiseaseMessageDetailsActivity extends MainBaseActivity {
 	private void initView() {
 		setActionBar(R.layout.include_head_textbtn);
 		setActionBarWidgetResource(ViewIdConstant.ACTIONBAR_TITLE,
-				ResourceConstant.ACTIONBAR_TITLE, "病害详情");
+				ResourceConstant.ACTIONBAR_TITLE, "巡查记录详情");
 		BackImageView backImageView = (BackImageView) getActionBarViewByMarkId(
 				ViewIdConstant.ACTIONBAR_BACK_IAMGEVIEW,
 				ResourceConstant.ACTIONBAR_BACK_IMAGEVIEW);

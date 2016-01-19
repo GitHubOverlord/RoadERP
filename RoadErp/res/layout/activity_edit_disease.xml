@@ -19,22 +19,49 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="15dp"
                 android:orientation="horizontal" >
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="病害编号"
-                    android:textSize="@dimen/text_max" />
+                    android:layout_weight="1"
+                    android:orientation="horizontal" >
 
-                <EditText
-                    android:id="@+id/et_disease_number"
-                    android:layout_width="match_parent"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="路线编号"
+                        android:textSize="@dimen/text_max" />
+
+                    <EditText
+                        android:id="@+id/disease_road_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:singleLine="true" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint=""
-                    android:singleLine="true" />
+                    android:layout_weight="1"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="桩号  K"
+                        android:textSize="@dimen/text_max" />
+
+                    <EditText
+                        android:id="@+id/et_stake_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="numberDecimal"
+                        android:singleLine="true" />
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -42,21 +69,46 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="15dp"
                 android:orientation="horizontal" >
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="路线编号"
-                    android:textSize="@dimen/text_max" />
+                    android:layout_weight="1"
+                    android:orientation="horizontal" >
 
-                <EditText
-                    android:id="@+id/disease_road_number"
-                    android:layout_width="match_parent"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="病害等级"
+                        android:textSize="@dimen/text_max" />
+
+                    <Spinner
+                        android:id="@+id/disease_level"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:singleLine="true" />
+                    android:layout_weight="1"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="病害部位"
+                        android:textSize="@dimen/text_max" />
+
+                    <Spinner
+                        android:id="@+id/disease_category"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10" />
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -64,75 +116,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="15dp"
                 android:orientation="horizontal" >
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="桩号"
-                    android:textSize="@dimen/text_max" />
-
-                <EditText
-                    android:id="@+id/et_stake_number"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="numberDecimal"
-                    android:singleLine="true" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="30dp"
-                android:orientation="horizontal" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="病害等级"
-                    android:textSize="@dimen/text_max" />
-
-                <Spinner
-                    android:id="@+id/disease_level"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="30dp"
-                android:orientation="horizontal" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="病害部位"
-                    android:textSize="@dimen/text_max" />
-
-                <Spinner
-                    android:id="@+id/disease_category"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="30dp"
-                android:orientation="horizontal" >
-
-              <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="病害类型:"
@@ -157,7 +144,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="15dp"
                 android:orientation="horizontal" >
 
                 <TextView
@@ -178,21 +165,49 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="15dp"
                 android:orientation="horizontal" >
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="建议维修方案"
-                    android:textSize="@dimen/text_max" />
+                    android:layout_weight="1"
+                    android:orientation="horizontal" >
 
-                <EditText
-                    android:id="@+id/suggestion_fix"
-                    android:layout_width="match_parent"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="估算工作量"
+                        android:textSize="@dimen/text_max" />
+
+                    <EditText
+                        android:id="@+id/work_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="numberDecimal"
+                        android:singleLine="true" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:singleLine="true" />
+                    android:layout_weight="1"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="计量单位"
+                        android:textSize="@dimen/text_max" />
+
+                    <EditText
+                        android:id="@+id/measurement_unit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:singleLine="true" />
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -200,22 +215,51 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="15dp"
                 android:orientation="horizontal" >
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="估算工作量"
-                    android:textSize="@dimen/text_max" />
+                    android:layout_weight="1"
+                    android:orientation="horizontal" >
 
-                <EditText
-                    android:id="@+id/work_date"
-                    android:layout_width="match_parent"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="估算金额"
+                        android:textSize="@dimen/text_max" />
+
+                    <EditText
+                        android:id="@+id/estimated_amount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="numberDecimal"
+                        android:singleLine="true" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="numberDecimal"
-                    android:singleLine="true" />
+                    android:layout_weight="1"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="phone"
+                        android:singleLine="true"
+                        android:text="电话号码"
+                        android:textSize="@dimen/text_max" />
+
+                    <EditText
+                        android:id="@+id/phone_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:singleLine="true" />
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -223,52 +267,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_marginTop="30dp"
-                android:orientation="horizontal" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="计量单位"
-                    android:textSize="@dimen/text_max" />
-
-                <EditText
-                    android:id="@+id/measurement_unit"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:singleLine="true" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="30dp"
-                android:orientation="horizontal" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="估算金额"
-                    android:textSize="@dimen/text_max" />
-
-                <EditText
-                    android:id="@+id/estimated_amount"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="numberDecimal"
-                    android:singleLine="true" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="15dp"
                 android:orientation="horizontal"
                 android:visibility="gone" >
 
@@ -289,7 +288,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="15dp"
                 android:orientation="horizontal"
                 android:visibility="gone" >
 
@@ -311,7 +310,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="15dp"
                 android:orientation="horizontal"
                 android:visibility="gone" >
 
@@ -333,30 +332,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_marginTop="30dp"
-                android:orientation="horizontal" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="电话号码"
-                    android:textSize="@dimen/text_max" />
-
-                <EditText
-                    android:id="@+id/phone_number"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="phone"
-                    android:singleLine="true" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="15dp"
                 android:orientation="horizontal" >
 
                 <TextView
@@ -378,7 +354,29 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="建议维修方案"
+                    android:textSize="@dimen/text_max" />
+
+                <EditText
+                    android:id="@+id/suggestion_fix"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:singleLine="true" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="15dp"
                 android:orientation="horizontal" >
 
                 <FrameLayout

@@ -13,7 +13,7 @@
     <dimen name="indicator_internal_padding">4dp</dimen>
     <dimen name="header_footer_left_right_padding">24dp</dimen>
     <dimen name="header_footer_top_bottom_padding">12dp</dimen>
-    <dimen name="text_max">20sp</dimen>
+    <dimen name="text_max">24sp</dimen>
     <dimen name="text_mid">18sp</dimen>
     <dimen name="text_min">16sp</dimen>
     <dimen name="text_max_min">14sp</dimen>

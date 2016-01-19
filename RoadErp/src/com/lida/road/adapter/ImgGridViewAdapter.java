@@ -17,13 +17,14 @@ import com.jun.frame.utils.MediaFile;
 import com.jun.frame.utils.SystemUtils;
 import com.lida.road.R;
 import com.lida.road.constant.HTTPConstant;
+import com.lida.road.entity.AffixFile;
 
 public class ImgGridViewAdapter extends BaseAdapter {
 	private Context context;
-	public List<String> list;
+	public List<AffixFile> list;
 	private LayoutInflater layoutInflater;
 
-	public ImgGridViewAdapter(Context context, List<String> list) {
+	public ImgGridViewAdapter(Context context, List<AffixFile> list) {
 		this.context = context;
 		layoutInflater = LayoutInflater.from(context);
 		this.list = list;
@@ -46,7 +47,7 @@ public class ImgGridViewAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		String imgUrl = list.get(position);
+		String imgUrl = list.get(position).getPath();
 		final String url = (HTTPConstant.HOST_URL_NO_SPRIT + imgUrl)
 				.replaceAll("\\\\", "/");
 

@@ -1,5 +1,7 @@
 package com.lida.road.activity.construction;
 
+import java.io.Serializable;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -55,7 +57,7 @@ public class ConstructionMessageDetailsActivity extends MainBaseActivity {
 	private void initView() {
 		setActionBar(R.layout.include_head_textbtn);
 		setActionBarWidgetResource(ViewIdConstant.ACTIONBAR_TITLE,
-				ResourceConstant.ACTIONBAR_TITLE, "施工任务详情");
+				ResourceConstant.ACTIONBAR_TITLE, "施工管理详情");
 		BackImageView backImageView = (BackImageView) getActionBarViewByMarkId(
 				ViewIdConstant.ACTIONBAR_BACK_IAMGEVIEW,
 				ResourceConstant.ACTIONBAR_BACK_IMAGEVIEW);
@@ -98,6 +100,7 @@ public class ConstructionMessageDetailsActivity extends MainBaseActivity {
 			bundle.putSerializable(
 					DiseaseMessageFragment.BUNDLE_DISEASE_MESSAGE, t
 							.getConstruction().getDiseaseRecord());
+			bundle.putSerializable(DiseaseMessageFragment.BUNDLE_DISEASE_ATTACHMENT, (Serializable) t.getAffixDiseaseRecordList());
 			diseaseMessageFragment.setArguments(bundle);
 			addFragment(diseaseMessageFragment, DiseaseMessageFragment.TAG,
 					R.id.fragment_construction_disease_details);

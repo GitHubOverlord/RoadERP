@@ -19,6 +19,7 @@ import com.jun.android_frame.view.MyGridView;
 import com.jun.frame.utils.SystemUtils;
 import com.lida.road.R;
 import com.lida.road.adapter.AttachmentAdapater;
+import com.lida.road.entity.AffixFile;
 
 public class AttachmentFragment extends Fragment {
 	private MyGridView gridView;
@@ -31,7 +32,7 @@ public class AttachmentFragment extends Fragment {
 		super();
 	}
 
-	public AttachmentFragment(List<String> list) {
+	public AttachmentFragment(List<AffixFile> list) {
 
 	}
 
@@ -43,12 +44,12 @@ public class AttachmentFragment extends Fragment {
 		attachmentAdapater = new AttachmentAdapater(getActivity());
 		Bundle bundle = getArguments();
 		if (bundle != null) {
-			List<String> list = (List<String>) bundle
+			List<AffixFile> list = (List<AffixFile>) bundle
 					.getSerializable(BUNDLE_IMG);
 			if (list != null) {
 				attachmentAdapater.attachmentUrl.remove(attachmentAdapater.attachmentUrl.size()-1);
 				attachmentAdapater.attachmentUrl.addAll(list);
-				attachmentAdapater.attachmentUrl.add("");
+				attachmentAdapater.attachmentUrl.add(new AffixFile());
 			}
 		}
 		gridView.setAdapter(attachmentAdapater);
@@ -56,13 +57,13 @@ public class AttachmentFragment extends Fragment {
 
 	}
 
-	public List<String> getImgUrls() {
-		List<String> returnPicList = new ArrayList<>();
+	public List<AffixFile> getImgUrls() {
+		List<AffixFile> returnPicList = new ArrayList<>();
 		returnPicList.addAll(attachmentAdapater.attachmentUrl);
 		if (returnPicList != null && returnPicList.size() > 0) {
 			returnPicList.remove(returnPicList.size() - 1);
 		}
-		return returnPicList == null ? new ArrayList<String>() : returnPicList;
+		return returnPicList == null ? new ArrayList<AffixFile>() : returnPicList;
 	}
 
 //	public void setImgUrls(List<String> list) {
@@ -95,8 +96,8 @@ public class AttachmentFragment extends Fragment {
 					System.out.println(filPath);
 					attachmentAdapater.attachmentUrl
 							.remove(attachmentAdapater.attachmentUrl.size() - 1);
-					attachmentAdapater.attachmentUrl.add(filPath);
-					attachmentAdapater.attachmentUrl.add("");
+					attachmentAdapater.attachmentUrl.add(new AffixFile(filPath));
+					attachmentAdapater.attachmentUrl.add(new AffixFile());
 					attachmentAdapater.notifyDataSetChanged();
 					System.out.println("总共有："
 							+ attachmentAdapater.attachmentUrl.size() + "数据");

@@ -43,10 +43,9 @@ public class EditDiseaseMessageActivity extends MainBaseActivity {
 	/**
 	 * 定义填写的表单EditText
 	 */
-	private EditText diseaseNumberEditText, roadNumberEditText,
-			stakeNumberEditText, suggestFixEditText, workDataEditText,
-			measurementUnitEditText, estimatedAmountEditText, phoneEditText,
-			remarkEditText;
+	private EditText roadNumberEditText, stakeNumberEditText,
+			suggestFixEditText, workDataEditText, measurementUnitEditText,
+			estimatedAmountEditText, phoneEditText, remarkEditText;
 	/**
 	 * 定义下拉选项
 	 */
@@ -73,6 +72,7 @@ public class EditDiseaseMessageActivity extends MainBaseActivity {
 	private AttachmentAndDisease attachmentAndDisease;
 	private boolean isSelectFirstTimeSelect = true;
 	private ChoiceDiseaseTypeDialog choiceDiseaseTypeDialog;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -89,14 +89,13 @@ public class EditDiseaseMessageActivity extends MainBaseActivity {
 		addFragment(attachmentFragment, AttachmentFragment.TAG);
 		setActionBar(R.layout.include_head_textbtn);
 		setActionBarWidgetResource(ViewIdConstant.ACTIONBAR_TITLE,
-				ResourceConstant.ACTIONBAR_TITLE, "添加病害信息");
+				ResourceConstant.ACTIONBAR_TITLE, "编辑巡查记录");
 		BackImageView backImageView = (BackImageView) getActionBarViewByMarkId(
 				ViewIdConstant.ACTIONBAR_BACK_IAMGEVIEW,
 				ResourceConstant.ACTIONBAR_BACK_IMAGEVIEW);
 		backImageView.setNormalBack(EditDiseaseMessageActivity.this);
 		diseaseLevelSpinner = (Spinner) findViewById(R.id.disease_level);
 		diseaseCatogegorySpinner = (Spinner) findViewById(R.id.disease_category);
-		diseaseNumberEditText = (EditText) findViewById(R.id.et_disease_number);
 		roadNumberEditText = (EditText) findViewById(R.id.disease_road_number);
 		choiceDiseaseTypeButton = (Button) findViewById(R.id.btn_choice_type);
 		showDiseaseTypeTextVeiw = (TextView) findViewById(R.id.tv_disease_type_value);
@@ -116,7 +115,7 @@ public class EditDiseaseMessageActivity extends MainBaseActivity {
 		/**
 		 * 初始化spinner数据
 		 */
-		spinnerDiseaseLevelString = new String[] { "严重", "轻" };
+		spinnerDiseaseLevelString = new String[] { "重", "轻","中" };
 		spinnerDiseasePositionString = new String[] { "左", "右" };
 		spinnerDiseaseCatogoryString = StringAdapter
 				.getAllDiseaseCatogries(EditDiseaseMessageActivity.this);
@@ -157,12 +156,15 @@ public class EditDiseaseMessageActivity extends MainBaseActivity {
 				String catogory = diseaseCatogegorySpinner.getSelectedItem()
 						.toString();
 				if (catogory == null || catogory.equals("")) {
-					SystemUtils.MToast("您还没选择病害类型", EditDiseaseMessageActivity.this);
+					SystemUtils.MToast("您还没选择病害类型",
+							EditDiseaseMessageActivity.this);
 					return;
 				}
 				choiceDiseaseTypeDialog = new ChoiceDiseaseTypeDialog(
-						EditDiseaseMessageActivity.this,showDiseaseTypeTextVeiw);
-				choiceDiseaseTypeDialog.show(catogory,showDiseaseTypeTextVeiw.getText().toString());
+						EditDiseaseMessageActivity.this,
+						showDiseaseTypeTextVeiw);
+				choiceDiseaseTypeDialog.show(catogory, showDiseaseTypeTextVeiw
+						.getText().toString());
 
 			}
 		});
@@ -187,13 +189,12 @@ public class EditDiseaseMessageActivity extends MainBaseActivity {
 		if (diseaseRecord == null) {
 			return;
 		}
-		SystemUtils.ifEditTextSetNullString(diseaseNumberEditText,
-				diseaseRecord.getSn());
 		SystemUtils.ifEditTextSetNullString(roadNumberEditText,
 				diseaseRecord.getRouteCode());
-		SystemUtils.ifEditTextSetNullString(stakeNumberEditText,
-				diseaseRecord.getStake() + "");
-		SystemUtils.ifTextSetNullString(showDiseaseTypeTextVeiw, diseaseRecord.getDiseaseType());
+		SystemUtils.ifEditTextSetNullString(stakeNumberEditText, diseaseRecord
+				.getStake() == null ? "" : (diseaseRecord.getStake() + ""));
+		SystemUtils.ifTextSetNullString(showDiseaseTypeTextVeiw,
+				diseaseRecord.getDiseaseType());
 		/**
 		 * /设置病害等级Spinner
 		 */
@@ -246,12 +247,16 @@ public class EditDiseaseMessageActivity extends MainBaseActivity {
 		}
 		SystemUtils.ifEditTextSetNullString(suggestFixEditText,
 				diseaseRecord.getEstimatingScheme());
-		SystemUtils.ifEditTextSetNullString(workDataEditText,
-				diseaseRecord.getEstimatingJob() + "");
+		SystemUtils.ifEditTextSetNullString(
+				workDataEditText,
+				diseaseRecord.getEstimatingJob() == null ? "" : (diseaseRecord
+						.getEstimatingJob() + ""));
 		SystemUtils.ifEditTextSetNullString(measurementUnitEditText,
 				diseaseRecord.getEstimatingUnit());
-		SystemUtils.ifEditTextSetNullString(estimatedAmountEditText,
-				diseaseRecord.getEstimatingCost() + "");
+		SystemUtils.ifEditTextSetNullString(
+				estimatedAmountEditText,
+				diseaseRecord.getEstimatingCost() == null ? "" : (diseaseRecord
+						.getEstimatingCost() + ""));
 		SystemUtils.ifEditTextSetNullString(phoneEditText,
 				diseaseRecord.getReportorPhone());
 		SystemUtils.ifEditTextSetNullString(remarkEditText,
@@ -279,8 +284,6 @@ public class EditDiseaseMessageActivity extends MainBaseActivity {
 				date,
 				phoneNumberString,
 				remark;
-				diseaseNumberString = diseaseNumberEditText.getEditableText()
-						.toString();
 				routeNumberString = roadNumberEditText.getEditableText()
 						.toString();
 				stakeNumberString = stakeNumberEditText.getEditableText()
@@ -304,13 +307,13 @@ public class EditDiseaseMessageActivity extends MainBaseActivity {
 						+ datePicker.getDayOfMonth();
 				phoneNumberString = phoneEditText.getEditableText().toString();
 				remark = remarkEditText.getEditableText().toString();
-				String checkDiseaseType = showDiseaseTypeTextVeiw.getText().toString();
+				String checkDiseaseType = showDiseaseTypeTextVeiw.getText()
+						.toString();
 				boolean notNull = StringsNotNull.judje(checkDiseaseType,
-						diseaseNumberString, routeNumberString,
-						stakeNumberString, diseaseLevel, diseaseCatogory,
-						diseasePosition, suggestFixString, workDateString,
-						measurementUnitString, estimatedAmountString, date,
-						phoneNumberString, remark);
+						routeNumberString, stakeNumberString, diseaseLevel,
+						diseaseCatogory, diseasePosition, suggestFixString,
+						workDateString, measurementUnitString,
+						estimatedAmountString, date, phoneNumberString, remark);
 				if (!notNull) {
 					SystemUtils.MToast("请填写完整，包括文字和图片",
 							EditDiseaseMessageActivity.this);
@@ -322,6 +325,8 @@ public class EditDiseaseMessageActivity extends MainBaseActivity {
 							EditDiseaseMessageActivity.this);
 					return;
 				}
+				diseaseNumberString = StringAdapter
+						.getDiseaseNumberByRouteNumber(routeNumberString);
 				DiseaseRecord upDiseaseRecord = new DiseaseRecord(
 						attachmentAndDisease.getDiseaseRecord().getId(),
 						diseaseNumberString, routeNumberString,

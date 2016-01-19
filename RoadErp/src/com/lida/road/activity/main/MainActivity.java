@@ -36,7 +36,7 @@ import com.lida.road.service.AttendanceSerivice;
  */
 public class MainActivity extends MainBaseActivity {
 	private GridView gridView;
-	private String items[] = { "巡查考勤", "病害信息", "施工任务", "验收任务" };
+	private String items[] = { "巡查考勤", "巡查上报", "施工管理", "验收管理" };
 	private int imgs[] = { R.drawable.iconfont_xuncha,
 			R.drawable.iconfont_xinxi, R.drawable.iconfont_daolushigong,
 			R.drawable.iconfont_shenhe };

@@ -19,7 +19,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="15dp"
                 android:orientation="horizontal" >
 
                 <TextView
@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="15dp"
                 android:orientation="horizontal" >
 
                 <TextView
@@ -63,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="15dp"
                 android:orientation="horizontal" >
 
                 <TextView
@@ -85,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="15dp"
                 android:orientation="horizontal" >
 
                 <TextView
@@ -107,7 +107,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="15dp"
                 android:orientation="horizontal" >
 
                 <TextView
@@ -129,7 +129,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="15dp"
                 android:orientation="horizontal" >
 
                 <TextView
@@ -151,7 +151,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="15dp"
                 android:orientation="horizontal" >
 
                 <TextView
@@ -173,7 +173,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="15dp"
                 android:orientation="horizontal" >
 
                 <TextView
@@ -195,7 +195,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="15dp"
                 android:orientation="horizontal" >
 
                 <TextView
@@ -217,7 +217,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="15dp"
                 android:orientation="horizontal" >
 
                 <TextView
@@ -239,7 +239,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="15dp"
                 android:orientation="horizontal" >
 
                 <TextView
@@ -261,7 +261,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="15dp"
                 android:orientation="horizontal" >
 
                 <TextView
@@ -283,7 +283,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="15dp"
                 android:orientation="horizontal" >
 
                 <TextView
@@ -305,7 +305,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="15dp"
                 android:orientation="horizontal" >
 
                 <TextView
@@ -327,7 +327,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="15dp"
                 android:orientation="horizontal" >
 
                 <TextView
@@ -349,10 +349,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="15dp"
                 android:background="@color/bg_color_deep"
                 android:orientation="horizontal" >
-
+				<TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="附件:"
+                    android:textSize="@dimen/text_max" />
                 <FrameLayout
                     android:id="@+id/fragment_attendance"
                     android:name="com.lida.road.fragment.ImgGridViewFragment"
