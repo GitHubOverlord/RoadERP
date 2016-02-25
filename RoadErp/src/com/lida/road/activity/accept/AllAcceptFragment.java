@@ -63,6 +63,12 @@ public class AllAcceptFragment extends Fragment {
 		pagePullRefreshView.start();
 	}
 
+	@Override
+	public void onResume() {
+		super.onResume();
+		
+	}
+
 	OnItemClickListener onItemClickListener = new OnItemClickListener() {
 
 		@Override

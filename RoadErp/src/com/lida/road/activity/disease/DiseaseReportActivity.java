@@ -24,6 +24,7 @@ import com.lida.road.R;
 import com.lida.road.activity.main.ChiocePeopleActivity;
 import com.lida.road.constant.HTTPConstant;
 import com.lida.road.constant.ViewIdConstant;
+import com.lida.road.entity.AffixFile;
 import com.lida.road.entity.DiseaseRecord;
 import com.lida.road.entity.UserMessage;
 import com.lida.road.utils.StringAdapter;
@@ -113,10 +114,6 @@ public class DiseaseReportActivity extends MainBaseActivity {
 					return;
 				}
 				String reportMessage = message.getEditableText().toString();
-				if (reportMessage.equals("")) {
-					SystemUtils.MToast("请填写上报意见", DiseaseReportActivity.this);
-					return;
-				}
 				if (mark == BUNDLE_FROM_DISEASE_DETAILS) {// 如果是从病害信息详情页面来的,只需要上传病害信息和ID以及上报人员和上报意见就尅了
 					String diseaseId = bundle
 							.getString(BUNDLE_VALUE_DISEASE_ID);
@@ -139,13 +136,7 @@ public class DiseaseReportActivity extends MainBaseActivity {
 				} else if (mark == BUNDLE_FROM_DISEASE_EDIT) {// 从病害信息编辑页面来的，需要提交整个病害信息表，以及病害信息意见和审批人
 					DiseaseRecord diseaseRecord = (DiseaseRecord) bundle
 							.getSerializable(BUNDLE_VALUE_DISEASE_MESSAGE);
-					String[] filePath = new String[diseaseRecord
-							.getAttachmentUrls().size()];
-					for (int i = 0; i < diseaseRecord.getAttachmentUrls()
-							.size(); i++) {
-						filePath[i] = diseaseRecord.getAttachmentUrls().get(i)
-								.getPath();
-					}
+
 					RequestParams params = new RequestParams();
 					params.put("deviceType", "momobile");
 					params.put("stepType", "next");// 下一步流程
@@ -208,6 +199,27 @@ public class DiseaseReportActivity extends MainBaseActivity {
 					params.put("diseaseRecord.diseasePart", StringAdapter
 							.getDiseaseIdByName(DiseaseReportActivity.this,
 									diseaseRecord.getDiseasePart()));
+					String flowStatusString = diseaseRecord.getFlowStatus();
+					if (flowStatusString != null
+							&& !flowStatusString.equals("")) {
+						params.put("diseaseRecord.flowStatus", flowStatusString);
+					}
+
+					for (int i = 0; i < diseaseRecord.getAttachmentUrls()
+							.size(); i++) {
+						AffixFile affixFile = diseaseRecord.getAttachmentUrls()
+								.get(i);
+						if (affixFile.getId() != null && !affixFile.equals("")) {// 如果Id不为Null而且不为""那说明这是一条服务器记录
+							diseaseRecord.getAttachmentUrls().remove(i);
+						}
+					}
+					String[] filePath = new String[diseaseRecord
+							.getAttachmentUrls().size()];
+					for (int i = 0; i < diseaseRecord.getAttachmentUrls()
+							.size(); i++) {
+						filePath[i] = diseaseRecord.getAttachmentUrls().get(i)
+								.getPath();
+					}
 					File[] files = new File[filePath.length];
 					for (int i = 0; i < filePath.length; i++) {
 						files[i] = new File(filePath[i]);
@@ -220,8 +232,20 @@ public class DiseaseReportActivity extends MainBaseActivity {
 					String fileNames = "";
 					for (int i = 0; i < files.length; i++) {
 						fileNames = fileNames + files[i].getName() + ";";
+
 					}
 					params.put("fileNames", fileNames);
+					/**
+					 * 删除文件的id数组
+					 */
+					String deleteFileId = "";
+					for (int i = 0; i < diseaseRecord.getRemoveAttachmentUrls()
+							.size(); i++) {
+						deleteFileId = deleteFileId
+								+ diseaseRecord.getRemoveAttachmentUrls()
+										.get(i).getId() + ";";
+					}
+					params.put("deleteFilesId", deleteFileId);
 					AsyncUploadFiles<String> asyncUploadFiles = new AsyncUploadFiles<>(
 							DiseaseReportActivity.this, "提示", "正在上传病害信息和附件",
 							httpConnectReciver, params,
@@ -254,7 +278,11 @@ public class DiseaseReportActivity extends MainBaseActivity {
 				remind = "上报失败";
 			} else if (status == 1) {
 				remind = "上报成功";
-				finish();
+				Intent intent = new Intent();
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				intent.setClass(DiseaseReportActivity.this,
+						DiseaseMessageActivity.class);
+				startActivity(intent);
 			} else if (status == 2) {
 				remind = "权限不足";
 			} else if (status == 3) {

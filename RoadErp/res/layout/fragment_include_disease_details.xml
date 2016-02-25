@@ -7,19 +7,19 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape_login_btn_selector"
-        android:padding="5dp"
         android:layout_marginRight="15dp"
-        android:layout_marginTop="15dp" >
+        android:layout_marginTop="15dp"
+        android:background="@drawable/shape_login_btn_selector"
+        android:padding="5dp" >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:textSize="@dimen/text_max"
+            android:text="巡查上报详情"
             android:textColor="@color/white"
-            android:text="病害信息详情" />
+            android:textSize="@dimen/text_max" />
 
         <TextView
             android:id="@+id/construction_details_spread"
@@ -27,10 +27,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:textSize="@dimen/text_max"
             android:layout_marginRight="15dp"
+            android:text="展开"
             android:textColor="@color/white"
-            android:text="展开" />
+            android:textSize="@dimen/text_max" />
     </RelativeLayout>
 
     <LinearLayout
@@ -43,339 +43,464 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="15dp"
             android:orientation="vertical" >
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="15dp"
-                android:orientation="horizontal" >
+                android:background="@drawable/list_blockbg_top"
+                android:orientation="horizontal"
+                android:padding="15dp" >
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="病害编号:"
+                    android:layout_weight="1"
+                    android:text="巡查编号"
+                    android:textColor="#696969"
                     android:textSize="@dimen/text_max" />
 
                 <TextView
                     android:id="@+id/disease_number"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_max"
-                    android:ems="10" />
+                    android:layout_weight="2"
+                    android:ems="10"
+                    android:textSize="@dimen/text_max" />
             </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:background="@drawable/list_blockbg_divider" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="15dp"
-                android:orientation="horizontal" >
+                android:background="@drawable/list_blockbg_middle"
+                android:orientation="horizontal"
+                android:padding="15dp" >
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="线路编号:"
+                    android:layout_weight="1"
+                    android:text="线路编号"
+                    android:textColor="#696969"
                     android:textSize="@dimen/text_max" />
 
                 <TextView
                     android:id="@+id/route_number"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_max"
-                    android:ems="10" />
+                    android:layout_weight="2"
+                    android:ems="10"
+                    android:textSize="@dimen/text_max" />
             </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:background="@drawable/list_blockbg_divider" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="15dp"
-                android:orientation="horizontal" >
+                android:background="@drawable/list_blockbg_middle"
+                android:orientation="horizontal"
+                android:padding="15dp" >
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="桩号:"
-                    
+                    android:layout_weight="1"
+                    android:text="桩号"
+                    android:textColor="#696969"
                     android:textSize="@dimen/text_max" />
 
                 <TextView
                     android:id="@+id/stake_number"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_max"
-                    android:ems="10" />
+                    android:layout_weight="2"
+                    android:ems="10"
+                    android:textSize="@dimen/text_max" />
             </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:background="@drawable/list_blockbg_divider" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="15dp"
-                android:orientation="horizontal" >
+                android:background="@drawable/list_blockbg_middle"
+                android:orientation="horizontal"
+                android:padding="15dp" >
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="病害等级:"
+                    android:layout_weight="1"
+                    android:text="病害等级"
+                    android:textColor="#696969"
                     android:textSize="@dimen/text_max" />
 
                 <TextView
                     android:id="@+id/disease_level"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_max"
-                    android:ems="10" />
+                    android:layout_weight="2"
+                    android:ems="10"
+                    android:textSize="@dimen/text_max" />
             </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:background="@drawable/list_blockbg_divider" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="15dp"
-                android:orientation="horizontal" >
+                android:background="@drawable/list_blockbg_middle"
+                android:orientation="horizontal"
+                android:padding="15dp" >
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="病害部位:"
+                    android:layout_weight="1"
+                    android:text="病害部位"
+                    android:textColor="#696969"
                     android:textSize="@dimen/text_max" />
 
                 <TextView
                     android:id="@+id/disease_catogory"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_max"
-                    android:ems="10" />
+                    android:layout_weight="2"
+                    android:ems="10"
+                    android:textSize="@dimen/text_max" />
             </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:background="@drawable/list_blockbg_divider" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="15dp"
-                android:orientation="horizontal" >
+                android:background="@drawable/list_blockbg_middle"
+                android:orientation="horizontal"
+                android:padding="15dp" >
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="病害类型:"
+                    android:layout_weight="1"
+                    android:text="病害类型"
+                    android:textColor="#696969"
                     android:textSize="@dimen/text_max" />
 
                 <TextView
                     android:id="@+id/disease_type"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_max"
-                    android:ems="10" />
+                    android:layout_weight="2"
+                    android:ems="10"
+                    android:textSize="@dimen/text_max" />
             </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:background="@drawable/list_blockbg_divider" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="15dp"
-                android:orientation="horizontal" >
+                android:background="@drawable/list_blockbg_middle"
+                android:orientation="horizontal"
+                android:padding="15dp" >
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="病害位置:"
+                    android:layout_weight="1"
+                    android:text="病害位置"
+                    android:textColor="#696969"
                     android:textSize="@dimen/text_max" />
 
                 <TextView
                     android:id="@+id/disease_position"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_max"
-                    android:ems="10" />
+                    android:layout_weight="2"
+                    android:ems="10"
+                    android:textSize="@dimen/text_max" />
             </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:background="@drawable/list_blockbg_divider" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="15dp"
-                android:orientation="horizontal" >
+                android:background="@drawable/list_blockbg_middle"
+                android:orientation="horizontal"
+                android:padding="15dp" >
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="建议维修方案:"
+                    android:layout_weight="1"
+                    android:text="建议维修方案"
+                    android:textColor="#696969"
                     android:textSize="@dimen/text_max" />
 
                 <TextView
                     android:id="@+id/suggest_fix"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_max"
-                    android:ems="10" />
+                    android:layout_weight="2"
+                    android:ems="10"
+                    android:textSize="@dimen/text_max" />
             </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:background="@drawable/list_blockbg_divider" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="15dp"
-                android:orientation="horizontal" >
+                android:background="@drawable/list_blockbg_middle"
+                android:orientation="horizontal"
+                android:padding="15dp" >
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="估算工作:"
+                    android:layout_weight="1"
+                    android:text="估算工作"
+                    android:textColor="#696969"
                     android:textSize="@dimen/text_max" />
 
                 <TextView
                     android:id="@+id/work_date"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_max"
-                    android:ems="10" />
+                    android:layout_weight="2"
+                    android:ems="10"
+                    android:textSize="@dimen/text_max" />
             </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:background="@drawable/list_blockbg_divider" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="15dp"
-                android:orientation="horizontal" >
+                android:background="@drawable/list_blockbg_middle"
+                android:orientation="horizontal"
+                android:padding="15dp" >
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="计量单位"
-                    
+                    android:textColor="#696969"
                     android:textSize="@dimen/text_max" />
 
                 <TextView
                     android:id="@+id/measurement_unit"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_max"
-                    android:ems="10" />
+                    android:layout_weight="2"
+                    android:ems="10"
+                    android:textSize="@dimen/text_max" />
             </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:background="@drawable/list_blockbg_divider" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="15dp"
-                android:orientation="horizontal" >
+                android:background="@drawable/list_blockbg_middle"
+                android:orientation="horizontal"
+                android:padding="15dp" >
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="估算金额:"
+                    android:layout_weight="1"
+                    android:text="估算金额"
+                    android:textColor="#696969"
                     android:textSize="@dimen/text_max" />
 
                 <TextView
                     android:id="@+id/estimated_amount"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_max"
-                    android:ems="10" />
+                    android:layout_weight="2"
+                    android:ems="10"
+                    android:textSize="@dimen/text_max" />
             </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:background="@drawable/list_blockbg_divider" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="15dp"
-                android:orientation="horizontal" >
+                android:background="@drawable/list_blockbg_middle"
+                android:orientation="horizontal"
+                android:padding="15dp" >
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="上报时间:"
+                    android:layout_weight="1"
+                    android:text="上报时间"
+                    android:textColor="#696969"
                     android:textSize="@dimen/text_max" />
 
                 <TextView
                     android:id="@+id/report_time"
-                    android:layout_width="match_parent"
-                    android:textSize="@dimen/text_max"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:ems="10" />
+                    android:layout_weight="2"
+                    android:ems="10"
+                    android:textSize="@dimen/text_max" />
             </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:background="@drawable/list_blockbg_divider" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="15dp"
-                android:orientation="horizontal" >
+                android:background="@drawable/list_blockbg_middle"
+                android:orientation="horizontal"
+                android:padding="15dp" >
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="上报人员:"
+                    android:layout_weight="1"
+                    android:text="上报人员"
+                    android:textColor="#696969"
                     android:textSize="@dimen/text_max" />
 
                 <TextView
                     android:id="@+id/report_people"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_max"
-                    android:ems="10" />
+                    android:layout_weight="2"
+                    android:ems="10"
+                    android:textSize="@dimen/text_max" />
             </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:background="@drawable/list_blockbg_divider" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="15dp"
-                android:orientation="horizontal" >
+                android:background="@drawable/list_blockbg_middle"
+                android:orientation="horizontal"
+                android:padding="15dp" >
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="上报单位:"
+                    android:layout_weight="1"
+                    android:text="上报单位"
+                    android:textColor="#696969"
                     android:textSize="@dimen/text_max" />
 
                 <TextView
                     android:id="@+id/report_enterpris"
-                    android:layout_width="match_parent"
-                    android:textSize="@dimen/text_max"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:ems="10" />
+                    android:layout_weight="2"
+                    android:ems="10"
+                    android:textSize="@dimen/text_max" />
             </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:background="@drawable/list_blockbg_divider" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="15dp"
-                android:orientation="horizontal" >
+                android:background="@drawable/list_blockbg_middle"
+                android:orientation="horizontal"
+                android:padding="15dp" >
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="电话号码:"
+                    android:layout_weight="1"
+                    android:text="电话号码"
+                    android:textColor="#696969"
                     android:textSize="@dimen/text_max" />
 
                 <TextView
                     android:id="@+id/report_number"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_max"
-                    android:ems="10" />
+                    android:layout_weight="2"
+                    android:ems="10"
+                    android:textSize="@dimen/text_max" />
             </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:background="@drawable/list_blockbg_divider" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="15dp"
-                android:orientation="horizontal" >
-	
-               
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="巡查上报附件:"
+                    android:textColor="#696969"
+                    android:textSize="@dimen/text_max" />
+
                 <FrameLayout
                     android:id="@+id/fragment_disease_img"
                     android:name="com.lida.road.fragment.ImgGridViewFragment"
                     android:layout_width="fill_parent"
-                    android:background="@color/bg_color_deep"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:background="@color/bg_color_deep" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

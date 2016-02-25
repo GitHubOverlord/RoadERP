@@ -38,7 +38,7 @@ public class AcceptDiseaseListFragment extends Fragment {
 	private List<DiseaseRecord> list;
 	private DiseaseMessageAdapter diseaseMessageAdapter;
 	private PullToRefreshListView pullToRefreshListView;
-	
+
 	public AcceptDiseaseListFragment() {
 		super();
 	}
@@ -67,6 +67,12 @@ public class AcceptDiseaseListFragment extends Fragment {
 		pagePullRefreshView.start();
 	}
 
+	@Override
+	public void onResume() {
+		super.onResume();
+		
+	}
+
 	OnItemClickListener onItemClickListener = new OnItemClickListener() {
 
 		@Override
@@ -82,7 +88,7 @@ public class AcceptDiseaseListFragment extends Fragment {
 					}.getType());
 			baseConnectTemplet.setProgressViewCanCancel();
 			baseConnectTemplet.getData();
-			
+
 		}
 
 	};
@@ -94,19 +100,18 @@ public class AcceptDiseaseListFragment extends Fragment {
 			 * 这里我们根据审批的状态判断是要跳转到可编辑的页面还是不可以编辑的页面
 			 */
 			DiseaseRecord diseaseRecord = t.getDiseaseRecord();
-			//&& diseaseRecord.getReportorId().equals(UserConstant.getAdmin(getActivity()).getId()
-			if (diseaseRecord.getFlowStatus().equals("0") ) {// 如果审批状态是0，并且这条记录就是本人的，那么就是巡查人员未上报，或者上报未审批的。是可以修改的
+			// &&
+			// diseaseRecord.getReportorId().equals(UserConstant.getAdmin(getActivity()).getId()
+			if (diseaseRecord.getFlowStatus().equals("0")) {// 如果审批状态是0，并且这条记录就是本人的，那么就是巡查人员未上报，或者上报未审批的。是可以修改的
 				Bundle bundle = new Bundle();
 				bundle.putSerializable(
-						EditDiseaseMessageActivity.BUNDLE_DISEASA_MESSAGE,
-						t);
+						EditDiseaseMessageActivity.BUNDLE_DISEASA_MESSAGE, t);
 				SystemUtils.intentToAnotherActivity(getActivity(),
 						EditDiseaseMessageActivity.class, bundle);
 			} else {// 否则的话，我们就跳转到不能修改的界面去
 				Bundle bundle = new Bundle();
 				bundle.putSerializable(
-						DiseaseMessageDetailsActivity.BUNDLE_DISEASE_MESSAGE,
-						t);
+						DiseaseMessageDetailsActivity.BUNDLE_DISEASE_MESSAGE, t);
 				SystemUtils.intentToAnotherActivity(getActivity(),
 						DiseaseMessageDetailsActivity.class, bundle);
 			}

@@ -5,25 +5,14 @@
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/construction_hdJob"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/construction_sn"
-        android:layout_alignBottom="@+id/construction_sn"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="15dp"
-        android:textSize="@dimen/text_max"
-        android:text="核定工程量" />
-
-    <TextView
         android:id="@+id/construction_publishDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/construction_executeDate"
+        android:layout_below="@+id/construction_sn"
         android:layout_alignParentRight="true"
         android:layout_marginRight="15dp"
-        android:textSize="@dimen/text_max"
-        android:text="发布时间" />
+        android:text="发布时间"
+        android:textSize="@dimen/text_max" />
 
     <TextView
         android:id="@+id/construction_sn"
@@ -41,9 +30,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/construction_sn"
-        android:layout_below="@+id/construction_sn"
-        android:layout_marginTop="21dp"
-        android:textSize="@dimen/text_max"
-        android:text="执行日期" />
+        android:layout_below="@+id/construction_hdJob"
+        android:text="执行日期"
+        android:textSize="@dimen/text_max" />
+
+    <TextView
+        android:id="@+id/construction_hdJob"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/construction_publishDate"
+        android:layout_alignBottom="@+id/construction_publishDate"
+        android:layout_alignLeft="@+id/construction_sn"
+        android:text="核定工程量"
+        android:textSize="@dimen/text_max" />
 
 </RelativeLayout>

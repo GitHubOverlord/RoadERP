@@ -31,7 +31,6 @@ import com.lida.road.entity.Construction;
 import com.lida.road.entity.ConstructionAndAttachment;
 import com.lida.road.fragment.AttachmentFragment;
 import com.lida.road.fragment.DiseaseMessageFragment;
-import com.lida.road.utils.DataUtil;
 import com.loopj.android.http.RequestParams;
 
 /**
@@ -45,7 +44,6 @@ public class ConstructionSupvisionDetailsActivity extends MainBaseActivity {
 	private AttachmentFragment attachmentFragment;
 	private ConstructionAndAttachment constructionAndAttachment;
 	public static final String BUNDLE_DISEASE_MESSAGE = "bundle_disease_message";
-	AttachmentFragment attachmentFragment1, attachmentFragment2;
 	private Button bcbtn;
 	private EditText cons_jlyj;
 
@@ -54,9 +52,6 @@ public class ConstructionSupvisionDetailsActivity extends MainBaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_construction_supvision_details);
 		initVie();
-
-		initView();
-
 	}
 
 	private void initVie() {
@@ -67,22 +62,34 @@ public class ConstructionSupvisionDetailsActivity extends MainBaseActivity {
 				ViewIdConstant.ACTIONBAR_BACK_IAMGEVIEW,
 				ResourceConstant.ACTIONBAR_BACK_IMAGEVIEW);
 		backImageView.setNormalBack(ConstructionSupvisionDetailsActivity.this);
-		attachmentFragment = new AttachmentFragment();
-		addFragment(attachmentFragment, AttachmentFragment.TAG,
-				R.id.fragment_attendance1);
 		Bundle bundle = getIntent().getExtras();
 		constructionAndAttachment = (ConstructionAndAttachment) bundle
 				.getSerializable(BUNDLE_DISEASE_MESSAGE);
 		cons_jlyj = (EditText) findViewById(R.id.cons_jlyj);
+		String supervisionRemark = constructionAndAttachment.getConstruction()
+				.getSupervisorRemark();
+		cons_jlyj.setText(supervisionRemark == null ? "" : supervisionRemark);
 		bcbtn = (Button) findViewById(R.id.bc_btn);
 		diseaseMessageFragment = new DiseaseMessageFragment();
 		Bundle diseaseBundle = new Bundle();
 		diseaseBundle.putSerializable(
-				DiseaseMessageFragment.BUNDLE_DISEASE_MESSAGE, constructionAndAttachment.getConstruction().getDiseaseRecord());
-		diseaseBundle.putSerializable(DiseaseMessageFragment.BUNDLE_DISEASE_ATTACHMENT, (Serializable) constructionAndAttachment.getAffixDiseaseRecordList());
+				DiseaseMessageFragment.BUNDLE_DISEASE_MESSAGE,
+				constructionAndAttachment.getConstruction().getDiseaseRecord());
+		diseaseBundle.putSerializable(
+				DiseaseMessageFragment.BUNDLE_DISEASE_ATTACHMENT,
+				(Serializable) constructionAndAttachment
+						.getAffixDiseaseRecordList());
 		diseaseMessageFragment.setArguments(diseaseBundle);
 		addFragment(diseaseMessageFragment, DiseaseMessageFragment.TAG,
 				R.id.fragment_construction_disease_details);
+		Bundle attachBundle = new Bundle();
+		attachBundle.putSerializable(AttachmentFragment.BUNDLE_IMG,
+				(Serializable) constructionAndAttachment
+						.getAffixSupervisorList());
+		attachmentFragment = new AttachmentFragment();
+		attachmentFragment.setArguments(attachBundle);
+		addFragment(attachmentFragment, AttachmentFragment.TAG,
+				R.id.fragment_attendance1);
 		bcbtn.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -95,11 +102,20 @@ public class ConstructionSupvisionDetailsActivity extends MainBaseActivity {
 	}
 
 	private void save() {
-
+		List<AffixFile> list = attachmentFragment.getImgUrls();
+		if (null == list || list.size() <= 0) {
+			SystemUtils.MToast("您还没选择施工附件！",
+					ConstructionSupvisionDetailsActivity.this);
+			return;
+		}
 		try {
-			RequestParams params = new RequestParams();
-
-			List<AffixFile> list = attachmentFragment1.getImgUrls();
+			RequestParams params = new RequestParams();// 剔除服务器文件的url
+			for (int i = 0; i < list.size(); i++) {
+				String id = list.get(i).getId();
+				if (id != null && !id.equals("")) {
+					list.remove(i);
+				}
+			}
 			if (null != list && list.size() > 0) {
 				File[] files = new File[list.size()];
 				for (int i = 0; i < list.size(); i++) {
@@ -112,12 +128,15 @@ public class ConstructionSupvisionDetailsActivity extends MainBaseActivity {
 				}
 				params.put("fileNames", fileNames);
 			}
-			if (DataUtil.isNull(cons_jlyj.getText().toString())) {
-				SystemUtils.MToast("请输入监理意见！",
-						ConstructionSupvisionDetailsActivity.this);
-				return;
+			String deleteFileId = "";
+			for (int i = 0; i < attachmentFragment.getRemoveList().size(); i++) {
+				deleteFileId = deleteFileId
+						+ attachmentFragment.getRemoveList().get(i).getId()
+						+ ";";
 			}
-			params.put("construction.id", constructionAndAttachment.getConstruction().getId());
+			params.put("deleteFilesId", deleteFileId);
+			params.put("construction.id", constructionAndAttachment
+					.getConstruction().getId());
 			params.put("construction.supervisorRemark", cons_jlyj.getText()
 					.toString().trim());
 			params.put("stepType", "finish");
@@ -168,15 +187,6 @@ public class ConstructionSupvisionDetailsActivity extends MainBaseActivity {
 
 	};
 
-	private void initView() {
-		attachmentFragment1 = new AttachmentFragment();
-		attachmentFragment2 = new AttachmentFragment();
-		addFragment(attachmentFragment1, AttachmentFragment.TAG + "1",
-				R.id.fragment_attendance1);
-		// addFragment(attachmentFragment2, AttachmentFragment.TAG + "2",
-		// R.id.fragment_attendance2);
-	}
-
 	private void addFragment(Fragment fragment, String tag, int id) {
 		FragmentManager manager = getSupportFragmentManager();
 		FragmentTransaction transaction = manager.beginTransaction();
@@ -189,10 +199,8 @@ public class ConstructionSupvisionDetailsActivity extends MainBaseActivity {
 		super.onActivityResult(requestCode, resultCode, data);
 		FragmentManager fragmentManager;
 		fragmentManager = getSupportFragmentManager();
-		Fragment f = fragmentManager.findFragmentByTag(AttachmentFragment.TAG
-				+ "1");
-		Fragment f2 = fragmentManager.findFragmentByTag(AttachmentFragment.TAG
-				+ "2");
+		Fragment f = fragmentManager.findFragmentByTag(AttachmentFragment.TAG);
+
 		/* 然后在碎片中调用重写的onActivityResult方法 */
 		f.onActivityResult(requestCode, resultCode, data);
 		// f2.onActivityResult(requestCode, resultCode, data);

@@ -1,5 +1,6 @@
 package com.lida.road.activity.disease;
 
+import java.io.Serializable;
 import java.util.List;
 
 import android.content.Intent;
@@ -19,6 +20,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.jun.android_frame.activity.MainBaseActivity;
+import com.jun.android_frame.constant.Constant;
 import com.jun.android_frame.constant.ResourceConstant;
 import com.jun.android_frame.view.BackImageView;
 import com.jun.frame.utils.StringsNotNull;
@@ -85,8 +87,6 @@ public class EditDiseaseMessageActivity extends MainBaseActivity {
 	 * 初始化控件
 	 */
 	private void initView() {
-		attachmentFragment = new AttachmentFragment();
-		addFragment(attachmentFragment, AttachmentFragment.TAG);
 		setActionBar(R.layout.include_head_textbtn);
 		setActionBarWidgetResource(ViewIdConstant.ACTIONBAR_TITLE,
 				ResourceConstant.ACTIONBAR_TITLE, "编辑巡查记录");
@@ -110,12 +110,14 @@ public class EditDiseaseMessageActivity extends MainBaseActivity {
 		peopleNameTextView = (TextView) findViewById(R.id.people_name);
 		peopleBelongEnterprisTextView = (TextView) findViewById(R.id.people_belong_enterpris_textView);
 		phoneEditText = (EditText) findViewById(R.id.phone_number);
+		String phone = UserConstant.admin.getPhone();
+		phoneEditText.setText(phone == null ? "":phone);
 		reportButton = (Button) findViewById(R.id.btn_report);
 		reportButton.setOnClickListener(listener);
 		/**
 		 * 初始化spinner数据
 		 */
-		spinnerDiseaseLevelString = new String[] { "重", "轻","中" };
+		spinnerDiseaseLevelString = new String[] { "重", "轻", "中" };
 		spinnerDiseasePositionString = new String[] { "左", "右" };
 		spinnerDiseaseCatogoryString = StringAdapter
 				.getAllDiseaseCatogries(EditDiseaseMessageActivity.this);
@@ -141,6 +143,12 @@ public class EditDiseaseMessageActivity extends MainBaseActivity {
 		Bundle bundle = getIntent().getExtras();
 		attachmentAndDisease = (AttachmentAndDisease) bundle
 				.getSerializable(BUNDLE_DISEASA_MESSAGE);
+		Bundle attachBundle = new Bundle();
+		attachBundle.putSerializable(AttachmentFragment.BUNDLE_IMG,
+				(Serializable) attachmentAndDisease.getAffixList());
+		attachmentFragment = new AttachmentFragment();
+		attachmentFragment.setArguments(attachBundle);
+		addFragment(attachmentFragment, AttachmentFragment.TAG);
 		/**
 		 * 设置监听事件
 		 */
@@ -309,19 +317,60 @@ public class EditDiseaseMessageActivity extends MainBaseActivity {
 				remark = remarkEditText.getEditableText().toString();
 				String checkDiseaseType = showDiseaseTypeTextVeiw.getText()
 						.toString();
-				boolean notNull = StringsNotNull.judje(checkDiseaseType,
-						routeNumberString, stakeNumberString, diseaseLevel,
-						diseaseCatogory, diseasePosition, suggestFixString,
-						workDateString, measurementUnitString,
-						estimatedAmountString, date, phoneNumberString, remark);
-				if (!notNull) {
-					SystemUtils.MToast("请填写完整，包括文字和图片",
+				if (checkDiseaseType == null || checkDiseaseType.equals("")) {
+					SystemUtils.MToast("请输入病害类型",
+							EditDiseaseMessageActivity.this);
+					return;
+				}
+				if (routeNumberString == null || routeNumberString.equals("")) {
+					SystemUtils.MToast("请输入路线编号",
+							EditDiseaseMessageActivity.this);
+					return;
+				}
+				if (stakeNumberString == null || stakeNumberString.equals("")) {
+					SystemUtils.MToast("请输入桩号",
+							EditDiseaseMessageActivity.this);
+					return;
+				}
+				if (diseaseLevel == null || diseaseLevel.equals("")) {
+					SystemUtils.MToast("请选择病害等级",
+							EditDiseaseMessageActivity.this);
+					return;
+				}
+				if (diseaseCatogory == null || diseaseCatogory.equals("")) {
+					SystemUtils.MToast("请选择病害部位",
+							EditDiseaseMessageActivity.this);
+					return;
+				}
+				if (diseasePosition == null || diseasePosition.equals("")) {
+					SystemUtils.MToast("请选择病害位置",
+							EditDiseaseMessageActivity.this);
+					return;
+				}
+				if (workDateString == null || workDateString.equals("")) {
+					SystemUtils.MToast("请输入估算工作日",
+							EditDiseaseMessageActivity.this);
+					return;
+				}
+				if (measurementUnitString == null || measurementUnitString.equals("")) {
+					SystemUtils.MToast("请输入计量单位",
+							EditDiseaseMessageActivity.this);
+					return;
+				}
+				if (estimatedAmountString == null || estimatedAmountString.equals("")) {
+					SystemUtils.MToast("请输入估算金额",
 							EditDiseaseMessageActivity.this);
 					return;
 				}
 				if (attachmentFragment.getImgUrls() == null
 						|| attachmentFragment.getImgUrls().size() <= 0) {
-					SystemUtils.MToast("请填写完整，包括文字和图片",
+					SystemUtils.MToast("请选择巡查信息附件",
+							EditDiseaseMessageActivity.this);
+					return;
+				}
+				if (attachmentFragment.getImgUrls() == null
+						|| attachmentFragment.getImgUrls().size() <= 0) {
+					SystemUtils.MToast("请选择巡查信息附件",
 							EditDiseaseMessageActivity.this);
 					return;
 				}
@@ -342,7 +391,10 @@ public class EditDiseaseMessageActivity extends MainBaseActivity {
 								EditDiseaseMessageActivity.this).getId(),
 						UserConstant.getAdmin(EditDiseaseMessageActivity.this)
 								.getName(), phoneNumberString, "", "", remark,
-						"", "", "", attachmentFragment.getImgUrls());
+						"", "", "", attachmentFragment.getImgUrls(),
+						attachmentFragment.getRemoveList());
+				upDiseaseRecord.setFlowStatus(attachmentAndDisease
+						.getDiseaseRecord().getFlowStatus());
 				intentToReportActivity(upDiseaseRecord);
 				break;
 			default:

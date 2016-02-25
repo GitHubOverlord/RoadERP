@@ -45,7 +45,6 @@ public class ConstructionDutyDetailsActivity extends MainBaseActivity {
 	private AttachmentFragment attachmentFragment;
 	private ConstructionAndAttachment constructionAndAttachment;
 	public static final String BUNDLE_DISEASE_MESSAGE = "bundle_disease_message";
-	AttachmentFragment attachmentFragment1;
 	private Button wgbtn;
 	private DatePicker datePicker;
 	private EditText cons_ms;
@@ -55,8 +54,6 @@ public class ConstructionDutyDetailsActivity extends MainBaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_construction_details);
 		initVie();
-
-		initView();
 
 	}
 
@@ -68,20 +65,29 @@ public class ConstructionDutyDetailsActivity extends MainBaseActivity {
 				ViewIdConstant.ACTIONBAR_BACK_IAMGEVIEW,
 				ResourceConstant.ACTIONBAR_BACK_IMAGEVIEW);
 		backImageView.setNormalBack(ConstructionDutyDetailsActivity.this);
-		attachmentFragment = new AttachmentFragment();
-		addFragment(attachmentFragment, AttachmentFragment.TAG,
-				R.id.fragment_attendance1);
 		Bundle bundle = getIntent().getExtras();
 		constructionAndAttachment = (ConstructionAndAttachment) bundle
 				.getSerializable(BUNDLE_DISEASE_MESSAGE);
 		diseaseMessageFragment = new DiseaseMessageFragment();
 		Bundle diseaseBundle = new Bundle();
 		diseaseBundle.putSerializable(
-				DiseaseMessageFragment.BUNDLE_DISEASE_MESSAGE, constructionAndAttachment.getConstruction().getDiseaseRecord());
-		diseaseBundle.putSerializable(DiseaseMessageFragment.BUNDLE_DISEASE_ATTACHMENT, (Serializable) constructionAndAttachment.getAffixDiseaseRecordList());
+				DiseaseMessageFragment.BUNDLE_DISEASE_MESSAGE,
+				constructionAndAttachment.getConstruction().getDiseaseRecord());
+		diseaseBundle.putSerializable(
+				DiseaseMessageFragment.BUNDLE_DISEASE_ATTACHMENT,
+				(Serializable) constructionAndAttachment
+						.getAffixDiseaseRecordList());
 		diseaseMessageFragment.setArguments(diseaseBundle);
 		addFragment(diseaseMessageFragment, DiseaseMessageFragment.TAG,
 				R.id.fragment_construction_disease_details);
+		Bundle attachBundle = new Bundle();
+		attachBundle.putSerializable(AttachmentFragment.BUNDLE_IMG,
+				(Serializable) constructionAndAttachment
+						.getAffixConstructionList());
+		attachmentFragment = new AttachmentFragment();
+		attachmentFragment.setArguments(attachBundle);
+		addFragment(attachmentFragment, AttachmentFragment.TAG,
+				R.id.fragment_attendance1);
 		datePicker = (DatePicker) findViewById(R.id.date_picker);
 		cons_ms = (EditText) findViewById(R.id.cons_ms);
 		wgbtn = (Button) findViewById(R.id.wg_btn);
@@ -100,20 +106,19 @@ public class ConstructionDutyDetailsActivity extends MainBaseActivity {
 	}
 
 	private void save() {
-
+		List<AffixFile> list = attachmentFragment.getImgUrls();
+		if (null == list || list.size() <= 0) {
+			SystemUtils.MToast("您还没选择施工附件！",
+					ConstructionDutyDetailsActivity.this);
+			return;
+		}
 		try {
 			RequestParams params = new RequestParams();
-
-			List<AffixFile> list = attachmentFragment1.getImgUrls();
-			if (null == list || list.size() <= 0) {
-				SystemUtils.MToast("您还没选择施工附件！",
-						ConstructionDutyDetailsActivity.this);
-				return;
-			}
-			if (DataUtil.isNull(cons_ms.getText().toString())) {
-				SystemUtils.MToast("请输入描述信息！",
-						ConstructionDutyDetailsActivity.this);
-				return;
+			for (int i = 0; i < list.size(); i++) {
+				String id = list.get(i).getId();
+				if (id != null && !id.equals("")) {
+					list.remove(i);
+				}
 			}
 			File[] files = new File[list.size()];
 			for (int i = 0; i < list.size(); i++) {
@@ -121,10 +126,17 @@ public class ConstructionDutyDetailsActivity extends MainBaseActivity {
 			}
 			String date = datePicker.getYear() + "-" + datePicker.getMonth()
 					+ 1 + "-" + datePicker.getDayOfMonth();
-
+			String deleteFileId = "";
+			for (int i = 0; i < attachmentFragment.getRemoveList().size(); i++) {
+				deleteFileId = deleteFileId
+						+ attachmentFragment.getRemoveList().get(i).getId()
+						+ ";";
+			}
+			params.put("deleteFilesId", deleteFileId);
 			System.out.println("日期"
 					+ DataUtil.parseStringDate("yyyy-MM-dd", date));
-			params.put("construction.id", constructionAndAttachment.getConstruction().getId());
+			params.put("construction.id", constructionAndAttachment
+					.getConstruction().getId());
 			params.put("construction.remark", cons_ms.getText().toString()
 					.trim());
 			params.put("construction.completeDate",
@@ -180,15 +192,6 @@ public class ConstructionDutyDetailsActivity extends MainBaseActivity {
 		}
 
 	};
-	
-
-	private void initView() {
-		attachmentFragment1 = new AttachmentFragment();
-		addFragment(attachmentFragment1, AttachmentFragment.TAG + "1",
-				R.id.fragment_attendance1);
-		// addFragment(attachmentFragment2, AttachmentFragment.TAG + "2",
-		// R.id.fragment_attendance2);
-	}
 
 	private void addFragment(Fragment fragment, String tag, int id) {
 		FragmentManager manager = getSupportFragmentManager();
@@ -202,10 +205,8 @@ public class ConstructionDutyDetailsActivity extends MainBaseActivity {
 		super.onActivityResult(requestCode, resultCode, data);
 		FragmentManager fragmentManager;
 		fragmentManager = getSupportFragmentManager();
-		Fragment f = fragmentManager.findFragmentByTag(AttachmentFragment.TAG
-				+ "1");
-		Fragment f2 = fragmentManager.findFragmentByTag(AttachmentFragment.TAG
-				+ "2");
+		Fragment f = fragmentManager.findFragmentByTag(AttachmentFragment.TAG);
+
 		/* 然后在碎片中调用重写的onActivityResult方法 */
 		f.onActivityResult(requestCode, resultCode, data);
 		// f2.onActivityResult(requestCode, resultCode, data);

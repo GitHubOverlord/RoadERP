@@ -63,18 +63,24 @@ public class WaitToAcceptFragment extends Fragment {
 		pagePullRefreshView.start();
 	}
 
+	@Override
+	public void onResume() {
+		super.onResume();
+		
+	}
+
 	OnItemClickListener onItemClickListener = new OnItemClickListener() {
 
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
 			Bundle bundle = new Bundle();
-			bundle.putInt(AcceptDetailsActivity.BUNDLE_MARK,AcceptDetailsActivity.BUNDLE_FROM_ACCEPT_REPORT);
-			bundle.putSerializable(
-					AcceptDetailsActivity.BUNDLE_ACCPET_MESSAGE,
+			bundle.putInt(AcceptDetailsActivity.BUNDLE_MARK,
+					AcceptDetailsActivity.BUNDLE_FROM_ACCEPT_REPORT);
+			bundle.putSerializable(AcceptDetailsActivity.BUNDLE_ACCPET_MESSAGE,
 					list.get(position - 1));
 			SystemUtils.intentToAnotherActivity(getActivity(),
-				AcceptDetailsActivity.class, bundle);
+					AcceptDetailsActivity.class, bundle);
 		}
 
 	};

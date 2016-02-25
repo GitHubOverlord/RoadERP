@@ -45,10 +45,9 @@ public class AddDeseaMessageActivity extends MainBaseActivity {
 	/**
 	 * 定义填写的表单EditText
 	 */
-	private EditText roadNumberEditText,
-			stakeNumberEditText, suggestFixEditText, workDataEditText,
-			measurementUnitEditText, estimatedAmountEditText, phoneEditText,
-			remarkEditText;
+	private EditText roadNumberEditText, stakeNumberEditText,
+			suggestFixEditText, workDataEditText, measurementUnitEditText,
+			estimatedAmountEditText, phoneEditText, remarkEditText;
 	/**
 	 * 定义下拉选项
 	 */
@@ -133,6 +132,8 @@ public class AddDeseaMessageActivity extends MainBaseActivity {
 		peopleNameTextView = (TextView) findViewById(R.id.people_name);
 		peopleBelongEnterprisTextView = (TextView) findViewById(R.id.people_belong_enterpris_textView);
 		phoneEditText = (EditText) findViewById(R.id.phone_number);
+		String phone = UserConstant.admin.getPhone();
+		phoneEditText.setText(phone == null ? "":phone);
 		saveButton = (Button) findViewById(R.id.btn_keep);
 		reportButton = (Button) findViewById(R.id.btn_report);
 		saveButton.setOnClickListener(listener);
@@ -158,7 +159,7 @@ public class AddDeseaMessageActivity extends MainBaseActivity {
 		/**
 		 * 初始化spinner数据
 		 */
-		spinnerDiseaseLevelString = new String[] { "重", "轻","中" };
+		spinnerDiseaseLevelString = new String[] { "重", "轻", "中" };
 		spinnerDiseasePositionString = new String[] { "左", "右" };
 		spinnerDiseaseCatogoryString = StringAdapter
 				.getAllDiseaseCatogries(AddDeseaMessageActivity.this);
@@ -331,24 +332,59 @@ public class AddDeseaMessageActivity extends MainBaseActivity {
 			String checkDiseaseType = showDiseaseTypeTextVeiw.getText()
 					.toString();
 			System.out.println(checkDiseaseType.toString());
-			boolean notNull = StringsNotNull.judje(checkDiseaseType,
-					 routeNumberString, stakeNumberString,
-					diseaseLevel, diseaseCatogory, diseasePosition,
-					suggestFixString, workDateString, measurementUnitString,
-					estimatedAmountString, date, phoneNumberString, remark,
-					localId);
-			if (!notNull) {
-				SystemUtils.MToast("请填写完整，包括文字和图片",
+			if (checkDiseaseType == null || checkDiseaseType.equals("")) {
+				SystemUtils.MToast("请输入病害类型",
+						AddDeseaMessageActivity.this);
+				return;
+			}
+			if (routeNumberString == null || routeNumberString.equals("")) {
+				SystemUtils.MToast("请输入路线编号",
+						AddDeseaMessageActivity.this);
+				return;
+			}
+			if (stakeNumberString == null || stakeNumberString.equals("")) {
+				SystemUtils.MToast("请输入桩号",
+						AddDeseaMessageActivity.this);
+				return;
+			}
+			if (diseaseLevel == null || diseaseLevel.equals("")) {
+				SystemUtils.MToast("请选择病害等级",
+						AddDeseaMessageActivity.this);
+				return;
+			}
+			if (diseaseCatogory == null || diseaseCatogory.equals("")) {
+				SystemUtils.MToast("请选择病害部位",
+						AddDeseaMessageActivity.this);
+				return;
+			}
+			if (diseasePosition == null || diseasePosition.equals("")) {
+				SystemUtils.MToast("请选择病害位置",
+						AddDeseaMessageActivity.this);
+				return;
+			}
+			if (workDateString == null || workDateString.equals("")) {
+				SystemUtils.MToast("请输入估算工作日",
+						AddDeseaMessageActivity.this);
+				return;
+			}
+			if (measurementUnitString == null || measurementUnitString.equals("")) {
+				SystemUtils.MToast("请输入计量单位",
+						AddDeseaMessageActivity.this);
+				return;
+			}
+			if (estimatedAmountString == null || estimatedAmountString.equals("")) {
+				SystemUtils.MToast("请输入估算金额",
 						AddDeseaMessageActivity.this);
 				return;
 			}
 			if (attachmentFragment.getImgUrls() == null
 					|| attachmentFragment.getImgUrls().size() <= 0) {
-				SystemUtils.MToast("请填写完整，包括文字和图片",
+				SystemUtils.MToast("请选择巡查信息附件",
 						AddDeseaMessageActivity.this);
 				return;
 			}
-			diseaseNumberString = StringAdapter.getDiseaseNumberByRouteNumber(routeNumberString);
+			diseaseNumberString = StringAdapter
+					.getDiseaseNumberByRouteNumber(routeNumberString);
 			DiseaseRecord upDiseaseRecord = new DiseaseRecord("",
 					diseaseNumberString, routeNumberString,
 					Double.valueOf(stakeNumberString), diseaseLevel,
@@ -363,7 +399,8 @@ public class AddDeseaMessageActivity extends MainBaseActivity {
 							AddDeseaMessageActivity.this).getId(), UserConstant
 							.getAdmin(AddDeseaMessageActivity.this)
 							.getUsername(), phoneNumberString, "", "", remark,
-					"", "", localId, attachmentFragment.getImgUrls());
+					"", "", localId, attachmentFragment.getImgUrls(),
+					attachmentFragment.getRemoveList());
 			switch (arg0.getId()) {
 			case R.id.btn_keep:
 				PersistenceManager.getInstance(AddDeseaMessageActivity.this)

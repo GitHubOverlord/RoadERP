@@ -4,6 +4,9 @@ import java.util.List;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -12,9 +15,13 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.jun.android_frame.dao.CacheFileDao;
+import com.jun.android_frame.entity.CacheFileBean;
 import com.jun.android_frame.http.utils.AsyncCacheFileDownloads;
+import com.jun.frame.utils.BitmapUtilities;
 import com.jun.frame.utils.MediaFile;
 import com.jun.frame.utils.SystemUtils;
+import com.jun.frame.utils.VedioThumbnailUtil;
 import com.lida.road.R;
 import com.lida.road.constant.HTTPConstant;
 import com.lida.road.entity.AffixFile;
@@ -58,13 +65,31 @@ public class ImgGridViewAdapter extends BaseAdapter {
 		relativeLayout = (RelativeLayout) convertView
 				.findViewById(R.id.attachement_rl);
 		imageView = (ImageView) convertView.findViewById(R.id.attachement_iv);
+		CacheFileBean cacheFileBean = CacheFileDao.getInstance(context)
+				.findFileIsEixt(url, context);
 		boolean isVedio = MediaFile.isVideoFileType(url);
-		if (isVedio) {
-			imageView.setBackgroundResource(R.drawable.bg_vedio);
+		if (cacheFileBean != null) {
+			Bitmap bm;
+			if (isVedio) {// 判断是文件还是视频
+				VedioThumbnailUtil vedioThumbnailUtil = new VedioThumbnailUtil();
+				bm = vedioThumbnailUtil.getVideoThumbnail(cacheFileBean
+						.getLocalPath());
+			} else {
+				BitmapUtilities bitmapUtilities = new BitmapUtilities();
+				bm = bitmapUtilities.getBitmapThumbnail(
+						cacheFileBean.getLocalPath(), 160, 160);
+			}
+			Drawable drawable = new BitmapDrawable(bm);
+			imageView.setBackgroundDrawable(drawable);
 		} else {
-			imageView.setBackgroundResource(R.drawable.bg_pic);
+			if (isVedio) {
+				imageView.setBackgroundResource(R.drawable.bg_vedio);
+			} else {
+				imageView.setBackgroundResource(R.drawable.bg_pic);
 
+			}
 		}
+
 		imageView.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -74,7 +99,7 @@ public class ImgGridViewAdapter extends BaseAdapter {
 				AsyncCacheFileDownloads asyncCacheFileDownloads = new AsyncCacheFileDownloads();
 				try {
 					asyncCacheFileDownloads.downloadFile(url,
-							type[type.length - 1], context);
+							type[type.length - 1], context,imageView);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

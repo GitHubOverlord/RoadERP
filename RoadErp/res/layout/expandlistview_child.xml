@@ -9,7 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_gravity="center"
-         android:textSize="@dimen/text_max"
+         android:textSize="22sp"
+         android:textColor="#996600"
         android:gravity="center" />
  
 </LinearLayout>

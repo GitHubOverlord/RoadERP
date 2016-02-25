@@ -72,6 +72,12 @@ public class AcppectConstructionFragment extends Fragment {
 		pagePullRefreshView.start();
 	}
 
+	@Override
+	public void onResume() {
+		super.onResume();
+		
+	}
+
 	HttpConnectReciver<ConstructionAndAttachment> httpConnectReciver = new HttpConnectReciver<ConstructionAndAttachment>() {
 
 		@Override
@@ -102,7 +108,8 @@ public class AcppectConstructionFragment extends Fragment {
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
 			RequestParams requestParams = new RequestParams();
-			requestParams.put("construction.id", list.get(position-1).getId());
+			requestParams
+					.put("construction.id", list.get(position - 1).getId());
 			BaseConnectTemplet<ConstructionAndAttachment> baseConnectTemplet = new BaseConnectTemplet<>(
 					getActivity(), "提示", "正在获取详细记录", httpConnectReciver,
 					requestParams, HTTPConstant.GET_CONSTRUCTION_BY_ID,

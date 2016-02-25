@@ -7,6 +7,7 @@ import java.util.Map;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,6 +46,7 @@ public class ChiocePeopleActivity extends MainBaseActivity {
 	public static final int BUNDLE_FROM_DISEASE = 1;
 	public static final int BUNDLE_FROM_ACCEPT = 2;
 	public static final String BUNDLE_ACCEPTENCE_ID = "accept_id";
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -62,6 +64,7 @@ public class ChiocePeopleActivity extends MainBaseActivity {
 		backImageView.setNormalBack(ChiocePeopleActivity.this);
 		mainlistview = (ExpandableListView) this
 				.findViewById(R.id.main_expandablelistview);
+		mainlistview.setGroupIndicator(null);
 		Bundle bundle = getIntent().getExtras();
 		int from = bundle.getInt(BUNDLE_FROM_MARK);
 		if (from == BUNDLE_FROM_DISEASE) {// 从病害信息来的
@@ -122,7 +125,13 @@ public class ChiocePeopleActivity extends MainBaseActivity {
 				}
 				map.put(parent.get(i).getId(), listBeans);
 			}
-			mainlistview.setAdapter(new MyAdapter());
+			MyAdapter myAdapter = new MyAdapter();
+			mainlistview.setAdapter(myAdapter);
+			for (int i = 0; i < myAdapter.getGroupCount(); i++) {
+
+				mainlistview.expandGroup(i);
+
+			}
 		}
 
 		@Override
@@ -204,6 +213,15 @@ public class ChiocePeopleActivity extends MainBaseActivity {
 					.findViewById(R.id.parent_textview);
 			tv.setText(ChiocePeopleActivity.this.parent.get(groupPosition)
 					.getName());
+			Drawable drawable;
+			if (isExpanded) {
+				drawable = getResources().getDrawable(R.drawable.lt_open2);
+
+			} else {
+				drawable = getResources().getDrawable(R.drawable.lt_norml2);
+			}
+			tv.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable,
+					null);
 			return tv;
 		}
 

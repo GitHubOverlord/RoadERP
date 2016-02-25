@@ -64,7 +64,7 @@ public class StringAdapter {
 		Date date = new Date();
 		@SuppressWarnings("deprecation")
 		String dateString = ""+date.getYear()+date.getMonth()+date.getDay()+date.getHours()+date.getMinutes()+date.getSeconds()+"";
-		String string = "XC"+"["+number+"]"+dateString;
+		String string = "XC"+number+dateString;
 		return string;
 
 	}

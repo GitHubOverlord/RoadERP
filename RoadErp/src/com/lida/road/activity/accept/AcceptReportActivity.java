@@ -118,7 +118,7 @@ public class AcceptReportActivity extends MainBaseActivity {
 					requestParams.add("acceptance.hdCost",
 							bundle.getString(BUNDLE_VALUE_HDCOST));
 					requestParams.add("acceptance.acceptanceDate",
-									bundle.getString(BUNDLE_VALUE_DATE));
+							bundle.getString(BUNDLE_VALUE_DATE));
 				} else if (from == BUNDLE_FROM_WORK_BRANCH) {// 工务科
 					// 工務科不用傳送
 				}
@@ -146,14 +146,18 @@ public class AcceptReportActivity extends MainBaseActivity {
 				SystemUtils.MToast("上报失败！", AcceptReportActivity.this);
 			} else if (status == 1) {
 				SystemUtils.MToast("上报成功", AcceptReportActivity.this);
-				finish();
+				Intent intent = new Intent();
+				intent.setClass(AcceptReportActivity.this,
+						CheckAndAcceptDutyActivity.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(intent);
 			} else if (status == 2) {
 				SystemUtils.MToast("权限不足", AcceptReportActivity.this);
 			} else if (status == 3) {
 				SystemUtils
 						.MToast("您未登录或登录过期，请重新登陆", AcceptReportActivity.this);
 			}
-			
+
 		}
 
 		@Override

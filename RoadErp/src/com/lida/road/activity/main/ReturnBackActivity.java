@@ -1,5 +1,6 @@
 package com.lida.road.activity.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -15,6 +16,8 @@ import com.jun.android_frame.inter.HttpConnectReciver;
 import com.jun.android_frame.view.BackImageView;
 import com.jun.frame.utils.SystemUtils;
 import com.lida.road.R;
+import com.lida.road.activity.accept.CheckAndAcceptDutyActivity;
+import com.lida.road.activity.disease.DiseaseMessageActivity;
 import com.lida.road.constant.HTTPConstant;
 import com.lida.road.constant.ViewIdConstant;
 import com.loopj.android.http.RequestParams;
@@ -104,6 +107,16 @@ public class ReturnBackActivity extends MainBaseActivity {
 				message = "提交失败";
 			} else if (status == 1) {
 				message = "提交成功";
+				Intent intent = new Intent();
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				if (mark == BUNDLE_FROM_ACCEPT_DETAILS) {// 从审核单来的
+					intent.setClass(ReturnBackActivity.this,
+							CheckAndAcceptDutyActivity.class);
+				} else if (mark == BUNDLE_FROM_DISEASE_DETAILS) {// 从病害详情页面来的
+					intent.setClass(ReturnBackActivity.this,
+							DiseaseMessageActivity.class);
+				}
+				startActivity(intent);
 			} else if (status == 2) {
 				message = "权限不足";
 			} else if (status == 3) {

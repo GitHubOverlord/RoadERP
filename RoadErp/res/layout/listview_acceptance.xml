@@ -6,28 +6,10 @@
     android:padding="15dp" >
 
     <TextView
-        android:id="@+id/accpentance_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:text=""
-        android:textSize="@dimen/text_max" />
-
-    <TextView
-        android:id="@+id/accpentance_approved"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/accpentance_date"
-        android:layout_marginTop="15dp"
-        android:text=""
-        android:textSize="@dimen/text_max" />
-
-    <TextView
         android:id="@+id/accpentance_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
+        android:text="编号"
         android:textSize="@dimen/text_max" />
 
     <TextView
@@ -35,8 +17,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
          android:layout_below="@+id/accpentance_number"
-        android:layout_marginTop="15dp"
-        android:text=""
+        android:text="桩号"
+        android:textSize="@dimen/text_max" />
+
+    <TextView
+        android:id="@+id/accpentance_approved"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/accpentance_stake"
+        android:layout_below="@+id/accpentance_stake"
+        android:text="审批状态"
+        android:textSize="@dimen/text_max" />
+
+    <TextView
+        android:id="@+id/accpentance_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/accpentance_stake"
+        android:layout_alignBottom="@+id/accpentance_stake"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="23dp"
+        android:text="日期"
         android:textSize="@dimen/text_max" />
 
 </RelativeLayout>

@@ -8,4 +8,5 @@ public class Constant {
 	 */
 	public static final String PATTERN_STRING_DATE="yyyy-MM-dd";
 	public static  Header[] headers;
+	public static String CAMERA_FILE_PATH;
 }

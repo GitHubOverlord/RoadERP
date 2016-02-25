@@ -2,14 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="15dp"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:padding="15dp" >
 
     <TextView
         android:id="@+id/disease_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
+        android:layout_below="@+id/disease_number"
         android:text=""
         android:textSize="@dimen/text_max" />
 
@@ -17,16 +18,7 @@
         android:id="@+id/disease_approved"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
         android:layout_below="@+id/disease_date"
-        android:text=""
-        android:layout_marginTop="15dp"
-        android:textSize="@dimen/text_max" />
-
-    <TextView
-        android:id="@+id/disease_number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text=""
         android:textSize="@dimen/text_max" />
 
@@ -34,9 +26,15 @@
         android:id="@+id/disease_stake"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
         android:layout_below="@+id/disease_number"
-        android:layout_marginTop="15dp"
+        android:text=""
+        android:textSize="@dimen/text_max" />
+
+    <TextView
+        android:id="@+id/disease_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
         android:textSize="@dimen/text_max" />
 
 </RelativeLayout>

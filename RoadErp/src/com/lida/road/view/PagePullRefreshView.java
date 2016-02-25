@@ -30,7 +30,7 @@ public class PagePullRefreshView<T> implements IPullRefreshListTemplet,
 	private String url;
 	private RequestParams requestParams;
 	private List<T> list;
-	private int page;
+	private int page = 1;
 	private boolean isHead = true;
 	private Type type;
 	
@@ -65,7 +65,7 @@ public class PagePullRefreshView<T> implements IPullRefreshListTemplet,
 						c.getResources().getString(R.string.release_to_load));
 
 		pullToRefreshListView.setOnRefreshListener(this);
-		getData(1);
+		getData(page);
 	}
 
 	@Override
@@ -80,12 +80,13 @@ public class PagePullRefreshView<T> implements IPullRefreshListTemplet,
 	@Override
 	public void pullFromFoot() {
 		isHead = false;
-		getData(++page);
+		page = page+1;
+		getData(page);
 	}
 
 	@Override
 	public void getData(final int page) {
-		requestParams.add("pager.currentPage", page + "");
+		requestParams.put("pager.currentPage", page + "");
 		HttpConnectByJson<BasePagerEntity> httpConnectByJson = new HttpConnectByJson<BasePagerEntity>(
 				new HttpConnectReciver<BasePagerEntity>() {
 
@@ -94,7 +95,7 @@ public class PagePullRefreshView<T> implements IPullRefreshListTemplet,
 							BaseEntity baseEntity) {
 						pullToRefreshListView.onRefreshComplete();
 						Pager pager = t.getPager();
-						if (!isHead && pager.getTotalPage() <= page) {// 拿到的页面和当前页面一样
+						if (!isHead && pager.getTotalPage() < page) {// 拿到的页面和当前页面一样
 							SystemUtils.MToast("没有更多数据", c);
 							return;
 						}

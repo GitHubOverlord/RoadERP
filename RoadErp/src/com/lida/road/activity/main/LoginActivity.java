@@ -1,5 +1,6 @@
 package com.lida.road.activity.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -75,6 +76,29 @@ public class LoginActivity extends MainBaseActivity {
 		UserConstant.diseaseTypes = null;
 	}
 
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		String host = PersistenceManager.getInstance(LoginActivity.this)
+				.getHostIp();
+		String port = PersistenceManager.getInstance(LoginActivity.this)
+				.getHostPort();
+		if (host != null && port != null && !host.equals("")
+				&& !port.equals("")) {
+			HTTPConstant.HOST_URL_NO_SPRIT = "http://" + host + ":" + port;
+			HTTPConstant.HOST_URL = HTTPConstant.HOST_URL_NO_SPRIT + "/";
+			System.out.println("Ip被设置为:" + HTTPConstant.HOST_URL + "--"
+					+ HTTPConstant.HOST_URL_NO_SPRIT);
+			HTTPConstant.resetValues();
+		}
+
+		// else {
+		// HTTPConstant.HOST_URL = null;
+		// HTTPConstant.HOST_URL_NO_SPRIT = null;
+		// }
+	}
+
 	/**
 	 * 监听事件
 	 */
@@ -87,6 +111,10 @@ public class LoginActivity extends MainBaseActivity {
 			 * 这里是登录请求的事件
 			 */
 			case R.id.login_login:// 登录按钮事件执行
+				if (HTTPConstant.HOST_URL == null) {
+					SystemUtils.MToast("请设置Ip地址和端口号", LoginActivity.this);
+					return;
+				}
 				userNameString = userNameEditText.getEditableText().toString();
 				passwordString = passwordEditText.getEditableText().toString();
 				if (userNameString.equals("") || passwordString.equals("")) {
@@ -140,8 +168,10 @@ public class LoginActivity extends MainBaseActivity {
 						userNameString);
 				PersistenceManager.getInstance(LoginActivity.this).putPassorw(
 						passwordString);
-				SystemUtils.intentToAnotherActivity(LoginActivity.this,
-						MainActivity.class);
+				Intent intent = new Intent();
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				intent.setClass(LoginActivity.this, MainActivity.class);
+				startActivity(intent);
 				finish();
 			} else if (baseEntity.getStatus() == 2) {// 没权限
 				SystemUtils.MToast("没有权限", LoginActivity.this);

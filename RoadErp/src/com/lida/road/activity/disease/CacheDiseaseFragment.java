@@ -37,7 +37,8 @@ public class CacheDiseaseFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		view = inflater.inflate(R.layout.fragment_disease_cache, container, false);
+		view = inflater.inflate(R.layout.fragment_disease_cache, container,
+				false);
 		initView(view);
 		return view;
 
@@ -45,12 +46,17 @@ public class CacheDiseaseFragment extends Fragment {
 
 	private void initView(View view) {
 		listView = (ListView) view.findViewById(R.id.listview_cache_disease);
+
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
 		list = PersistenceManager.getInstance(getActivity())
 				.getDiseaseRecords();
 		diseaseMessageAdapter = new DiseaseMessageAdapter(getActivity(), list);
 		listView.setAdapter(diseaseMessageAdapter);
 		listView.setOnItemClickListener(onItemClickListener);
-
 	}
 
 	OnItemClickListener onItemClickListener = new OnItemClickListener() {
@@ -59,7 +65,8 @@ public class CacheDiseaseFragment extends Fragment {
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
 			Bundle bundle = new Bundle();
-			bundle.putInt(AddDeseaMessageActivity.Bundle_FROM_MARK, AddDeseaMessageActivity.BUNDLE_FROM_CACHE);
+			bundle.putInt(AddDeseaMessageActivity.Bundle_FROM_MARK,
+					AddDeseaMessageActivity.BUNDLE_FROM_CACHE);
 			bundle.putSerializable(
 					AddDeseaMessageActivity.BUNDLE_DISEASA_MESSAGE,
 					list.get(position));
