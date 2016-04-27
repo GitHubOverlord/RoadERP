@@ -304,7 +304,7 @@ public class DataUtil {
 			    data = dateFormat.format(date1);
 			    return data;
 			}
-		} catch (ParseException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;

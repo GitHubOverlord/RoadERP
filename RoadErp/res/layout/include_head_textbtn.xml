@@ -36,11 +36,12 @@
             android:layout_centerVertical="true"
             android:layout_marginBottom="8dp"
             android:layout_marginRight="@dimen/back_btn_marginleft"
+            android:layout_marginLeft="15dp"
             android:layout_marginTop="8dp"
             android:textColor="@color/head_title"
             android:layout_toRightOf="@+id/head_title"
             android:singleLine="true"
-            android:textSize="@dimen/text_max" />
+            android:textSize="@dimen/text_mid" />
     </RelativeLayout>
 
 </RelativeLayout>

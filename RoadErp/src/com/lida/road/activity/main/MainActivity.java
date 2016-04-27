@@ -92,7 +92,7 @@ public class MainActivity extends MainBaseActivity {
 				uploadLocatinServiceIntent.setAction(AttendanceSerivice.TAG);
 				uploadLocatinServiceIntent.setPackage(getPackageName());
 				if (isUploadingLocation) {
-					textView.setText("巡查考勤");
+					textView.setText("巡查轨迹记录");
 					isUploadingLocation = false;
 					stopService(uploadLocatinServiceIntent);
 

@@ -102,7 +102,7 @@ public class AcceptDiseaseListFragment extends Fragment {
 			DiseaseRecord diseaseRecord = t.getDiseaseRecord();
 			// &&
 			// diseaseRecord.getReportorId().equals(UserConstant.getAdmin(getActivity()).getId()
-			if (diseaseRecord.getFlowStatus().equals("0")) {// 如果审批状态是0，并且这条记录就是本人的，那么就是巡查人员未上报，或者上报未审批的。是可以修改的
+			if (diseaseRecord.getFlowStatus().equals("0")) {// 如果审批状态是0，或者是1.0代表养护工人，1代表养护站长。并且这条记录就是本人的，那么就是巡查人员未上报，或者上报未审批的。是可以修改的
 				Bundle bundle = new Bundle();
 				bundle.putSerializable(
 						EditDiseaseMessageActivity.BUNDLE_DISEASA_MESSAGE, t);

@@ -22,6 +22,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="15dp"
+        android:singleLine="true"
         android:textSize="@dimen/text_max"
         android:text="施工单号" />
 
